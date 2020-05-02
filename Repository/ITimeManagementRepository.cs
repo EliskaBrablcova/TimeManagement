@@ -11,5 +11,6 @@ namespace Eli.TimeManagement.Repository
 		void Add(Record newRecord);
 		void Edit(Record editRecord);
 		void Delete(int id);
+		IList<string> GetAllTypes();
 	}
 }

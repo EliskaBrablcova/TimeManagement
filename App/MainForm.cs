@@ -81,7 +81,7 @@ namespace Eli.TimeManagement.App
 		private void createBtn_Click(object sender, EventArgs e)
 		{
 			var record = new Record();
-			var dialog = new RecordDialog(record, false);
+			var dialog = new RecordDialog(record, false, _repo.GetAllTypes());
 			var result = dialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
@@ -98,7 +98,7 @@ namespace Eli.TimeManagement.App
 				var selectedIndex = selected[0];
 				var record = _records[selectedIndex];
 
-				var dialog = new RecordDialog(record, true);
+				var dialog = new RecordDialog(record, true, _repo.GetAllTypes());
 				var result = dialog.ShowDialog();
 				if (result == DialogResult.OK)
 				{

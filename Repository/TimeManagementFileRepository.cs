@@ -58,6 +58,22 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(allRecords);
 		}
 
+		public IList<string> GetAllTypes()
+		{
+			var allRecords = readFromFile();
+			var types = new List<string>();
+			for (int i = 0; i < allRecords.Count; i++)
+			{
+				var record = allRecords[i];
+				if (record.Type != null && !types.Contains(record.Type))
+				{
+					types.Add(record.Type);
+				}
+			}
+			types.Sort();
+			return types;
+		}
+
 		public IList<Record> GetAll(string type)
 		{
 			var AllRecords = readFromFile();
@@ -116,5 +132,6 @@ namespace Eli.TimeManagement.Repository
 			}
 			return null;
 		}
+
 	}
 }

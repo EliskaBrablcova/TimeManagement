@@ -14,7 +14,7 @@ namespace Eli.TimeManagement.App
 	public partial class RecordDialog : Form
 	{
 		public Record Item;
-		public RecordDialog(Record item, bool isEdit)
+		public RecordDialog(Record item, bool isEdit, IList<string> types)
 		{
 			InitializeComponent();
 			if (item == null)
@@ -29,6 +29,13 @@ namespace Eli.TimeManagement.App
 			else
 			{
 				Text = "Založení záznamu";
+			}
+			if (types != null)
+			{
+				for (int i = 0; i < types.Count; i++)
+				{
+					typeCB.Items.Add(types[i]);
+				}
 			}
 		}
 		private void setControls()
