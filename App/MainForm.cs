@@ -133,5 +133,25 @@ namespace Eli.TimeManagement.App
 			}
 			setButtonStates();
 		}
+
+		private void createNoteBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void editNoteBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void deleteNoteBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void notesLv_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
