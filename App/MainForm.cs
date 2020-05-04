@@ -35,7 +35,7 @@ namespace Eli.TimeManagement.App
 		}
 		private void display(IList<Record> records)
 		{
-			dataLv.Items.Clear();
+			recordsLv.Items.Clear();
 			for (int i = 0; i < records.Count; i++)
 			{
 				addRow(records[i]);
@@ -46,21 +46,21 @@ namespace Eli.TimeManagement.App
 		{
 			var texts = new string[] { record.Start.Date.ToShortDateString(), record.MinutesTotal.ToString(), record.Type, record.Description };
 			var item = new ListViewItem(texts);
-			dataLv.Items.Add(item);
+			recordsLv.Items.Add(item);
 		}
 
-		private void deleteBtn_Click(object sender, EventArgs e)
+		private void deleteRecordBtn_Click(object sender, EventArgs e)
 		{
 			deleteRecord();
 		}
 
-		private void dataLv_SelectedIndexChanged(object sender, EventArgs e)
+		private void recordsLv_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			setButtonStates();
 		}
 		private void setButtonStates()
 		{
-			var selected = dataLv.SelectedIndices;
+			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
 				setButtonStates(true);
@@ -74,11 +74,11 @@ namespace Eli.TimeManagement.App
 		}
 		private void setButtonStates(bool enabled)
 		{
-			deleteBtn.Enabled = enabled;
-			editBtn.Enabled = enabled;
+			deleteRecordBtn.Enabled = enabled;
+			editRecordBtn.Enabled = enabled;
 		}
 
-		private void createBtn_Click(object sender, EventArgs e)
+		private void createRecordBtn_Click(object sender, EventArgs e)
 		{
 			var record = new Record();
 			var dialog = new RecordDialog(record, false, _repo.GetAllTypes());
@@ -90,9 +90,9 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
-		private void editBtn_Click(object sender, EventArgs e)
+		private void editRecordBtn_Click(object sender, EventArgs e)
 		{
-			var selected = dataLv.SelectedIndices;
+			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
 				var selectedIndex = selected[0];
@@ -109,7 +109,7 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
-		private void dataLv_KeyDown(object sender, KeyEventArgs e)
+		private void recordLv_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Delete)
 			{
@@ -119,7 +119,7 @@ namespace Eli.TimeManagement.App
 		private void deleteRecord()
 		{
 			setButtonStates(false);
-			var selected = dataLv.SelectedIndices;
+			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
 				var result = MessageBox.Show("Opravdu chcete smazat záznam?", "Varování", MessageBoxButtons.YesNo);
