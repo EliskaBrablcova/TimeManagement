@@ -69,7 +69,7 @@ namespace Eli.TimeManagement.App
 
 		private void addRow(Note note)
 		{
-			var texts = new string[] { note.Edited.ToString(), note.Text };
+			var texts = new string[] { note.Edited.ToString(), note.Text.Replace("\r\n", " ") };
 			var item = new ListViewItem(texts);
 			notesLv.Items.Add(item);
 		}
