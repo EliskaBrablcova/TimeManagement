@@ -15,11 +15,14 @@ namespace Eli.TimeManagement.App
 	public partial class MainForm : Form
 	{
 		private ITimeManagementRepository _repo;
+		private INoteRepository _noteRepo;
 		private IList<Record> _records;
+		private IList<Note> _notes;
 		public MainForm()
 		{
 			InitializeComponent();
 			_repo = new TimeManagementFileRepository("data.json");
+			_noteRepo = new NoteFileRepository("notes.json");
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -29,10 +32,15 @@ namespace Eli.TimeManagement.App
 		private void reload()
 		{
 			var records = _repo.GetAll(null);
+			var notes = _noteRepo.GetAll();
 			_records = records;
+			_notes = notes;
 			display(records);
-			setButtonStates();
+			display(notes);
+			setRecordButtonStates();
+			setNotesButtonStates();
 		}
+
 		private void display(IList<Record> records)
 		{
 			recordsLv.Items.Clear();
@@ -42,11 +50,28 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
+		private void display(IList<Note> notes)
+		{
+			notesLv.Items.Clear();
+			for (int i = 0; i < notes.Count; i++)
+			{
+				addRow(notes[i]);
+			}
+		}
+
+
 		private void addRow(Record record)
 		{
 			var texts = new string[] { record.Start.Date.ToShortDateString(), record.MinutesTotal.ToString(), record.Type, record.Description };
 			var item = new ListViewItem(texts);
 			recordsLv.Items.Add(item);
+		}
+
+		private void addRow(Note note)
+		{
+			var texts = new string[] { note.Edited.ToString(), note.Text };
+			var item = new ListViewItem(texts);
+			notesLv.Items.Add(item);
 		}
 
 		private void deleteRecordBtn_Click(object sender, EventArgs e)
@@ -56,26 +81,47 @@ namespace Eli.TimeManagement.App
 
 		private void recordsLv_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			setButtonStates();
+			setRecordButtonStates();
 		}
-		private void setButtonStates()
+		private void setRecordButtonStates()
 		{
 			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				setButtonStates(true);
+				setRecordButtonStates(true);
 			}
 			else
 			{
-				setButtonStates(false);
+				setRecordButtonStates(false);
 			}
 			//Altertativa:
 			//setButtonStates(selected.Count == 1);
 		}
-		private void setButtonStates(bool enabled)
+
+		private void setNotesButtonStates()
+		{
+			var selected = notesLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				setNotesButtonStates(true);
+			}
+			else
+			{
+				setNotesButtonStates(false);
+			}
+		}
+
+
+		private void setRecordButtonStates(bool enabled)
 		{
 			deleteRecordBtn.Enabled = enabled;
 			editRecordBtn.Enabled = enabled;
+		}
+
+		private void setNotesButtonStates(bool enabled)
+		{
+			deleteNoteBtn.Enabled = enabled;
+			editNoteBtn.Enabled = enabled;
 		}
 
 		private void createRecordBtn_Click(object sender, EventArgs e)
@@ -105,7 +151,6 @@ namespace Eli.TimeManagement.App
 					_repo.Edit(dialog.Item);
 					reload();
 				}
-
 			}
 		}
 
@@ -118,7 +163,7 @@ namespace Eli.TimeManagement.App
 		}
 		private void deleteRecord()
 		{
-			setButtonStates(false);
+			setRecordButtonStates(false);
 			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
@@ -131,27 +176,71 @@ namespace Eli.TimeManagement.App
 					reload();
 				}
 			}
-			setButtonStates();
+			setRecordButtonStates();
 		}
 
 		private void createNoteBtn_Click(object sender, EventArgs e)
 		{
-
+			var dialog = new NoteDialog(new Note(), false);
+			var result = dialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				_noteRepo.Add(dialog.Item);
+				reload();
+			}
 		}
 
 		private void editNoteBtn_Click(object sender, EventArgs e)
 		{
+			var selected = notesLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var selectedIndex = selected[0];
+				var note = _notes[selectedIndex];
 
+				var dialog = new NoteDialog(note, true);
+				var result = dialog.ShowDialog();
+				if (result == DialogResult.OK)
+				{
+					_noteRepo.Edit(dialog.Item);
+					reload();
+				}
+			}
 		}
 
 		private void deleteNoteBtn_Click(object sender, EventArgs e)
 		{
-
+			deleteNote();
 		}
 
 		private void notesLv_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			setNotesButtonStates();
+		}
+		private void deleteNote()
+		{
+			setNotesButtonStates(false);
+			var selected = notesLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var result = MessageBox.Show("Opravdu chcete poznámku smazat?", "Varování", MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes)
+				{
+					var selectedIndex = selected[0];
+					var id = _notes[selectedIndex].ID;
+					_noteRepo.Delete(id);
+					reload();
+				}
+			}
+			setNotesButtonStates();
+		}
 
+		private void notesLv_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				deleteNote();
+			}
 		}
 	}
 }

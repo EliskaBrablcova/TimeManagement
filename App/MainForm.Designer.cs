@@ -228,6 +228,8 @@
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.notesTlp.Size = new System.Drawing.Size(720, 294);
 			this.notesTlp.TabIndex = 1;
 			// 
@@ -260,11 +262,12 @@
 			this.notesLv.UseCompatibleStateImageBehavior = false;
 			this.notesLv.View = System.Windows.Forms.View.Details;
 			this.notesLv.SelectedIndexChanged += new System.EventHandler(this.notesLv_SelectedIndexChanged);
+			this.notesLv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.notesLv_KeyDown);
 			// 
 			// noteDateCh
 			// 
 			this.noteDateCh.Text = "Datum";
-			this.noteDateCh.Width = 100;
+			this.noteDateCh.Width = 110;
 			// 
 			// noteTextCh
 			// 

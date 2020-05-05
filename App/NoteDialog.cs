@@ -35,6 +35,7 @@ namespace Eli.TimeManagement.App
 		private void okBtn_Click(object sender, EventArgs e)
 		{
 			setNote();
+			DialogResult = DialogResult.OK;
 			Close();
 		}
 		
