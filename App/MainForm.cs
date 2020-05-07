@@ -21,8 +21,8 @@ namespace Eli.TimeManagement.App
 		public MainForm()
 		{
 			InitializeComponent();
-			_repo = new TimeManagementFileRepository("data.json");
-			_noteRepo = new NoteFileRepository("notes.json");
+			_repo = new TimeManagementFileRepository("data\\data.json");
+			_noteRepo = new NoteFileRepository("data\\notes.json");
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
