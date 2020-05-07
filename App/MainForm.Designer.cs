@@ -50,12 +50,23 @@
 			this.noteTextCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.editNoteBtn = new System.Windows.Forms.Button();
 			this.deleteNoteBtn = new System.Windows.Forms.Button();
+			this.dateToDtp = new System.Windows.Forms.DateTimePicker();
+			this.dateFromDtp = new System.Windows.Forms.DateTimePicker();
+			this.filtrationBtn = new System.Windows.Forms.Button();
+			this.typeCb = new System.Windows.Forms.ComboBox();
+			this.filtrationGB = new System.Windows.Forms.GroupBox();
+			this.dateFromLbl = new System.Windows.Forms.Label();
+			this.dateToLbl = new System.Windows.Forms.Label();
+			this.typeLbl = new System.Windows.Forms.Label();
+			this.filtrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
 			this.recordsTlp.SuspendLayout();
 			this.notesTP.SuspendLayout();
 			this.notesTlp.SuspendLayout();
+			this.filtrationGB.SuspendLayout();
+			this.filtrationTlp.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// recordsLv
@@ -74,7 +85,7 @@
 			this.recordsLv.MultiSelect = false;
 			this.recordsLv.Name = "recordsLv";
 			this.recordsTlp.SetRowSpan(this.recordsLv, 4);
-			this.recordsLv.Size = new System.Drawing.Size(519, 288);
+			this.recordsLv.Size = new System.Drawing.Size(516, 288);
 			this.recordsLv.TabIndex = 0;
 			this.recordsLv.UseCompatibleStateImageBehavior = false;
 			this.recordsLv.View = System.Windows.Forms.View.Details;
@@ -147,7 +158,7 @@
 			// 
 			this.versionLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.versionLbl.AutoSize = true;
-			this.versionLbl.Location = new System.Drawing.Point(719, 459);
+			this.versionLbl.Location = new System.Drawing.Point(716, 459);
 			this.versionLbl.Name = "versionLbl";
 			this.versionLbl.Size = new System.Drawing.Size(28, 13);
 			this.versionLbl.TabIndex = 5;
@@ -164,7 +175,7 @@
 			this.mainTc.Multiline = true;
 			this.mainTc.Name = "mainTc";
 			this.mainTc.SelectedIndex = 0;
-			this.mainTc.Size = new System.Drawing.Size(734, 326);
+			this.mainTc.Size = new System.Drawing.Size(731, 326);
 			this.mainTc.TabIndex = 6;
 			// 
 			// recordsTP
@@ -173,7 +184,7 @@
 			this.recordsTP.Location = new System.Drawing.Point(4, 22);
 			this.recordsTP.Name = "recordsTP";
 			this.recordsTP.Padding = new System.Windows.Forms.Padding(3);
-			this.recordsTP.Size = new System.Drawing.Size(726, 300);
+			this.recordsTP.Size = new System.Drawing.Size(723, 300);
 			this.recordsTP.TabIndex = 0;
 			this.recordsTP.Text = "Časová evidence";
 			this.recordsTP.UseVisualStyleBackColor = true;
@@ -196,7 +207,9 @@
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.recordsTlp.Size = new System.Drawing.Size(720, 294);
+			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.recordsTlp.Size = new System.Drawing.Size(717, 294);
 			this.recordsTlp.TabIndex = 0;
 			// 
 			// notesTP
@@ -296,14 +309,110 @@
 			this.deleteNoteBtn.UseVisualStyleBackColor = true;
 			this.deleteNoteBtn.Click += new System.EventHandler(this.deleteNoteBtn_Click);
 			// 
+			// dateToDtp
+			// 
+			this.dateToDtp.Location = new System.Drawing.Point(83, 29);
+			this.dateToDtp.Name = "dateToDtp";
+			this.dateToDtp.Size = new System.Drawing.Size(200, 20);
+			this.dateToDtp.TabIndex = 8;
+			// 
+			// dateFromDtp
+			// 
+			this.dateFromDtp.Location = new System.Drawing.Point(83, 3);
+			this.dateFromDtp.Name = "dateFromDtp";
+			this.dateFromDtp.Size = new System.Drawing.Size(200, 20);
+			this.dateFromDtp.TabIndex = 9;
+			// 
+			// filtrationBtn
+			// 
+			this.filtrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.filtrationBtn.Location = new System.Drawing.Point(386, 55);
+			this.filtrationBtn.Name = "filtrationBtn";
+			this.filtrationBtn.Size = new System.Drawing.Size(74, 21);
+			this.filtrationBtn.TabIndex = 10;
+			this.filtrationBtn.Text = "Filtrování";
+			this.filtrationBtn.UseVisualStyleBackColor = true;
+			// 
+			// typeCb
+			// 
+			this.typeCb.FormattingEnabled = true;
+			this.typeCb.Location = new System.Drawing.Point(83, 55);
+			this.typeCb.Name = "typeCb";
+			this.typeCb.Size = new System.Drawing.Size(200, 21);
+			this.typeCb.TabIndex = 11;
+			// 
+			// filtrationGB
+			// 
+			this.filtrationGB.Controls.Add(this.filtrationTlp);
+			this.filtrationGB.Location = new System.Drawing.Point(218, 26);
+			this.filtrationGB.Name = "filtrationGB";
+			this.filtrationGB.Size = new System.Drawing.Size(469, 98);
+			this.filtrationGB.TabIndex = 12;
+			this.filtrationGB.TabStop = false;
+			this.filtrationGB.Text = "Filtrování";
+			// 
+			// dateFromLbl
+			// 
+			this.dateFromLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromLbl.Location = new System.Drawing.Point(3, 0);
+			this.dateFromLbl.Name = "dateFromLbl";
+			this.dateFromLbl.Size = new System.Drawing.Size(74, 26);
+			this.dateFromLbl.TabIndex = 12;
+			this.dateFromLbl.Text = "Datum od";
+			this.dateFromLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// dateToLbl
+			// 
+			this.dateToLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToLbl.Location = new System.Drawing.Point(3, 26);
+			this.dateToLbl.Name = "dateToLbl";
+			this.dateToLbl.Size = new System.Drawing.Size(74, 26);
+			this.dateToLbl.TabIndex = 13;
+			this.dateToLbl.Text = "Datum do";
+			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// typeLbl
+			// 
+			this.typeLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeLbl.Location = new System.Drawing.Point(3, 52);
+			this.typeLbl.Name = "typeLbl";
+			this.typeLbl.Size = new System.Drawing.Size(74, 27);
+			this.typeLbl.TabIndex = 14;
+			this.typeLbl.Text = "Typ aktivity";
+			this.typeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// filtrationTlp
+			// 
+			this.filtrationTlp.ColumnCount = 3;
+			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			this.filtrationTlp.Controls.Add(this.dateFromLbl, 0, 0);
+			this.filtrationTlp.Controls.Add(this.dateToDtp, 1, 1);
+			this.filtrationTlp.Controls.Add(this.typeLbl, 0, 2);
+			this.filtrationTlp.Controls.Add(this.filtrationBtn, 2, 2);
+			this.filtrationTlp.Controls.Add(this.dateToLbl, 0, 1);
+			this.filtrationTlp.Controls.Add(this.dateFromDtp, 1, 0);
+			this.filtrationTlp.Controls.Add(this.typeCb, 1, 2);
+			this.filtrationTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.filtrationTlp.Location = new System.Drawing.Point(3, 16);
+			this.filtrationTlp.Name = "filtrationTlp";
+			this.filtrationTlp.RowCount = 3;
+			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.filtrationTlp.Size = new System.Drawing.Size(463, 79);
+			this.filtrationTlp.TabIndex = 15;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(759, 480);
+			this.ClientSize = new System.Drawing.Size(756, 480);
 			this.Controls.Add(this.logoPb);
 			this.Controls.Add(this.mainTc);
 			this.Controls.Add(this.versionLbl);
+			this.Controls.Add(this.filtrationGB);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(719, 314);
 			this.Name = "MainForm";
@@ -315,6 +424,8 @@
 			this.recordsTlp.ResumeLayout(false);
 			this.notesTP.ResumeLayout(false);
 			this.notesTlp.ResumeLayout(false);
+			this.filtrationGB.ResumeLayout(false);
+			this.filtrationTlp.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -343,6 +454,15 @@
 		private System.Windows.Forms.ColumnHeader noteTextCh;
 		private System.Windows.Forms.Button editNoteBtn;
 		private System.Windows.Forms.Button deleteNoteBtn;
+		private System.Windows.Forms.DateTimePicker dateToDtp;
+		private System.Windows.Forms.DateTimePicker dateFromDtp;
+		private System.Windows.Forms.Button filtrationBtn;
+		private System.Windows.Forms.ComboBox typeCb;
+		private System.Windows.Forms.GroupBox filtrationGB;
+		private System.Windows.Forms.TableLayoutPanel filtrationTlp;
+		private System.Windows.Forms.Label dateFromLbl;
+		private System.Windows.Forms.Label typeLbl;
+		private System.Windows.Forms.Label dateToLbl;
 	}
 }
 
