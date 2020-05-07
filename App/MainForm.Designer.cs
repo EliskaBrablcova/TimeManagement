@@ -85,7 +85,7 @@
 			this.recordsLv.MultiSelect = false;
 			this.recordsLv.Name = "recordsLv";
 			this.recordsTlp.SetRowSpan(this.recordsLv, 4);
-			this.recordsLv.Size = new System.Drawing.Size(516, 288);
+			this.recordsLv.Size = new System.Drawing.Size(463, 288);
 			this.recordsLv.TabIndex = 0;
 			this.recordsLv.UseCompatibleStateImageBehavior = false;
 			this.recordsLv.View = System.Windows.Forms.View.Details;
@@ -110,7 +110,7 @@
 			// recordDescriptionCh
 			// 
 			this.recordDescriptionCh.Text = "Popis aktivity";
-			this.recordDescriptionCh.Width = 223;
+			this.recordDescriptionCh.Width = 169;
 			// 
 			// logoPb
 			// 
@@ -158,7 +158,7 @@
 			// 
 			this.versionLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.versionLbl.AutoSize = true;
-			this.versionLbl.Location = new System.Drawing.Point(716, 459);
+			this.versionLbl.Location = new System.Drawing.Point(663, 459);
 			this.versionLbl.Name = "versionLbl";
 			this.versionLbl.Size = new System.Drawing.Size(28, 13);
 			this.versionLbl.TabIndex = 5;
@@ -175,7 +175,7 @@
 			this.mainTc.Multiline = true;
 			this.mainTc.Name = "mainTc";
 			this.mainTc.SelectedIndex = 0;
-			this.mainTc.Size = new System.Drawing.Size(731, 326);
+			this.mainTc.Size = new System.Drawing.Size(678, 326);
 			this.mainTc.TabIndex = 6;
 			// 
 			// recordsTP
@@ -184,7 +184,7 @@
 			this.recordsTP.Location = new System.Drawing.Point(4, 22);
 			this.recordsTP.Name = "recordsTP";
 			this.recordsTP.Padding = new System.Windows.Forms.Padding(3);
-			this.recordsTP.Size = new System.Drawing.Size(723, 300);
+			this.recordsTP.Size = new System.Drawing.Size(670, 300);
 			this.recordsTP.TabIndex = 0;
 			this.recordsTP.Text = "Časová evidence";
 			this.recordsTP.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.recordsTlp.Size = new System.Drawing.Size(717, 294);
+			this.recordsTlp.Size = new System.Drawing.Size(664, 294);
 			this.recordsTlp.TabIndex = 0;
 			// 
 			// notesTP
@@ -218,7 +218,7 @@
 			this.notesTP.Location = new System.Drawing.Point(4, 22);
 			this.notesTP.Name = "notesTP";
 			this.notesTP.Padding = new System.Windows.Forms.Padding(3);
-			this.notesTP.Size = new System.Drawing.Size(726, 300);
+			this.notesTP.Size = new System.Drawing.Size(670, 300);
 			this.notesTP.TabIndex = 1;
 			this.notesTP.Text = "Poznámky";
 			this.notesTP.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.notesTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.notesTlp.Size = new System.Drawing.Size(720, 294);
+			this.notesTlp.Size = new System.Drawing.Size(664, 294);
 			this.notesTlp.TabIndex = 1;
 			// 
 			// createNoteBtn
@@ -270,7 +270,7 @@
 			this.notesLv.MultiSelect = false;
 			this.notesLv.Name = "notesLv";
 			this.notesTlp.SetRowSpan(this.notesLv, 4);
-			this.notesLv.Size = new System.Drawing.Size(519, 288);
+			this.notesLv.Size = new System.Drawing.Size(463, 288);
 			this.notesLv.TabIndex = 0;
 			this.notesLv.UseCompatibleStateImageBehavior = false;
 			this.notesLv.View = System.Windows.Forms.View.Details;
@@ -285,7 +285,7 @@
 			// noteTextCh
 			// 
 			this.noteTextCh.Text = "Poznámka";
-			this.noteTextCh.Width = 400;
+			this.noteTextCh.Width = 346;
 			// 
 			// editNoteBtn
 			// 
@@ -408,7 +408,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(756, 480);
+			this.ClientSize = new System.Drawing.Size(703, 480);
 			this.Controls.Add(this.logoPb);
 			this.Controls.Add(this.mainTc);
 			this.Controls.Add(this.versionLbl);
