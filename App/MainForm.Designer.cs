@@ -55,10 +55,10 @@
 			this.filtrationBtn = new System.Windows.Forms.Button();
 			this.typeCb = new System.Windows.Forms.ComboBox();
 			this.filtrationGB = new System.Windows.Forms.GroupBox();
-			this.dateFromLbl = new System.Windows.Forms.Label();
-			this.dateToLbl = new System.Windows.Forms.Label();
-			this.typeLbl = new System.Windows.Forms.Label();
 			this.filtrationTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.dateFromLbl = new System.Windows.Forms.Label();
+			this.typeLbl = new System.Windows.Forms.Label();
+			this.dateToLbl = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -177,6 +177,7 @@
 			this.mainTc.SelectedIndex = 0;
 			this.mainTc.Size = new System.Drawing.Size(678, 326);
 			this.mainTc.TabIndex = 6;
+			this.mainTc.SelectedIndexChanged += new System.EventHandler(this.mainTc_SelectedIndexChanged);
 			// 
 			// recordsTP
 			// 
@@ -315,6 +316,7 @@
 			this.dateToDtp.Name = "dateToDtp";
 			this.dateToDtp.Size = new System.Drawing.Size(200, 20);
 			this.dateToDtp.TabIndex = 8;
+			this.dateToDtp.ValueChanged += new System.EventHandler(this.dateToDtp_ValueChanged);
 			// 
 			// dateFromDtp
 			// 
@@ -322,16 +324,18 @@
 			this.dateFromDtp.Name = "dateFromDtp";
 			this.dateFromDtp.Size = new System.Drawing.Size(200, 20);
 			this.dateFromDtp.TabIndex = 9;
+			this.dateFromDtp.ValueChanged += new System.EventHandler(this.dateFromDtp_ValueChanged);
 			// 
 			// filtrationBtn
 			// 
 			this.filtrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.filtrationBtn.Location = new System.Drawing.Point(386, 55);
+			this.filtrationBtn.Location = new System.Drawing.Point(364, 55);
 			this.filtrationBtn.Name = "filtrationBtn";
-			this.filtrationBtn.Size = new System.Drawing.Size(74, 21);
+			this.filtrationBtn.Size = new System.Drawing.Size(96, 21);
 			this.filtrationBtn.TabIndex = 10;
 			this.filtrationBtn.Text = "Filtrování";
 			this.filtrationBtn.UseVisualStyleBackColor = true;
+			this.filtrationBtn.Click += new System.EventHandler(this.filtrationBtn_Click);
 			// 
 			// typeCb
 			// 
@@ -340,6 +344,7 @@
 			this.typeCb.Name = "typeCb";
 			this.typeCb.Size = new System.Drawing.Size(200, 21);
 			this.typeCb.TabIndex = 11;
+			this.typeCb.TextChanged += new System.EventHandler(this.typeCb_TextChanged);
 			// 
 			// filtrationGB
 			// 
@@ -351,42 +356,12 @@
 			this.filtrationGB.TabStop = false;
 			this.filtrationGB.Text = "Filtrování";
 			// 
-			// dateFromLbl
-			// 
-			this.dateFromLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateFromLbl.Location = new System.Drawing.Point(3, 0);
-			this.dateFromLbl.Name = "dateFromLbl";
-			this.dateFromLbl.Size = new System.Drawing.Size(74, 26);
-			this.dateFromLbl.TabIndex = 12;
-			this.dateFromLbl.Text = "Datum od";
-			this.dateFromLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateToLbl
-			// 
-			this.dateToLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateToLbl.Location = new System.Drawing.Point(3, 26);
-			this.dateToLbl.Name = "dateToLbl";
-			this.dateToLbl.Size = new System.Drawing.Size(74, 26);
-			this.dateToLbl.TabIndex = 13;
-			this.dateToLbl.Text = "Datum do";
-			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// typeLbl
-			// 
-			this.typeLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.typeLbl.Location = new System.Drawing.Point(3, 52);
-			this.typeLbl.Name = "typeLbl";
-			this.typeLbl.Size = new System.Drawing.Size(74, 27);
-			this.typeLbl.TabIndex = 14;
-			this.typeLbl.Text = "Typ aktivity";
-			this.typeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// filtrationTlp
 			// 
 			this.filtrationTlp.ColumnCount = 3;
 			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
 			this.filtrationTlp.Controls.Add(this.dateFromLbl, 0, 0);
 			this.filtrationTlp.Controls.Add(this.dateToDtp, 1, 1);
 			this.filtrationTlp.Controls.Add(this.typeLbl, 0, 2);
@@ -403,6 +378,36 @@
 			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.filtrationTlp.Size = new System.Drawing.Size(463, 79);
 			this.filtrationTlp.TabIndex = 15;
+			// 
+			// dateFromLbl
+			// 
+			this.dateFromLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromLbl.Location = new System.Drawing.Point(3, 0);
+			this.dateFromLbl.Name = "dateFromLbl";
+			this.dateFromLbl.Size = new System.Drawing.Size(74, 26);
+			this.dateFromLbl.TabIndex = 12;
+			this.dateFromLbl.Text = "Datum od";
+			this.dateFromLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// typeLbl
+			// 
+			this.typeLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeLbl.Location = new System.Drawing.Point(3, 52);
+			this.typeLbl.Name = "typeLbl";
+			this.typeLbl.Size = new System.Drawing.Size(74, 27);
+			this.typeLbl.TabIndex = 14;
+			this.typeLbl.Text = "Typ aktivity";
+			this.typeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// dateToLbl
+			// 
+			this.dateToLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToLbl.Location = new System.Drawing.Point(3, 26);
+			this.dateToLbl.Name = "dateToLbl";
+			this.dateToLbl.Size = new System.Drawing.Size(74, 26);
+			this.dateToLbl.TabIndex = 13;
+			this.dateToLbl.Text = "Datum do";
+			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// MainForm
 			// 

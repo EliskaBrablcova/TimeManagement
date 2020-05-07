@@ -87,7 +87,7 @@ namespace Eli.TimeManagement.Repository
 				var record = AllRecords[i];
 				if ((type == null || record.Type == type) 
 					&& (dateFrom == null || record.Start >= dateFrom) 
-					&& (dateTo == null || record.Start <= dateFrom))
+					&& (dateTo == null || record.Start <= dateTo))
 				{
 					toReturn.Add(record);
 				}

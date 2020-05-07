@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,8 @@ namespace Eli.TimeManagement.App
 		private INoteRepository _noteRepo;
 		private IList<Record> _records;
 		private IList<Note> _notes;
+		private bool _activeFiltration;
+		private bool _reloadStop;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -31,14 +34,50 @@ namespace Eli.TimeManagement.App
 		}
 		private void reload()
 		{
-			var records = _repo.GetAll(null, null, null);
-			var notes = _noteRepo.GetAll(null, null);
+			var records = getRecords();
+			var notes = getNotes();
+			var types = _repo.GetAllTypes();
 			_records = records;
 			_notes = notes;
 			display(records);
 			display(notes);
 			setRecordButtonStates();
 			setNotesButtonStates();
+			setFiltrationTypes(types);
+		}
+
+
+		private IList<Record> getRecords()
+		{
+			if (_activeFiltration)
+			{
+				var dateFrom = dateFromDtp.Value.Date;
+				var dateTo = dateToDtp.Value.Date;
+				var type = typeCb.Text;
+				if (type == "")
+				{
+					type = null;
+				}
+				return _repo.GetAll(type, dateFrom, dateTo);
+			}
+			else
+			{
+				return _repo.GetAll(null, null, null);
+			}
+		}
+
+		private IList<Note> getNotes()
+		{
+			if (_activeFiltration)
+			{
+				var dateFrom = dateFromDtp.Value.Date;
+				var dateTo = dateToDtp.Value.Date;
+				return _noteRepo.GetAll(dateFrom, dateTo);
+			}
+			else
+			{
+				return _noteRepo.GetAll(null, null);
+			}
 		}
 
 		private void display(IList<Record> records)
@@ -241,6 +280,62 @@ namespace Eli.TimeManagement.App
 			{
 				deleteNote();
 			}
+		}
+
+		private void setFiltrationTypes(IList<string> types)
+		{
+			_reloadStop = true;
+			var originalValue = typeCb.Text;
+			typeCb.Items.Clear();
+			for (int i = 0; i < types.Count; i++)
+			{
+				typeCb.Items.Add(types[i]);
+			}
+			typeCb.Text = originalValue;
+			_reloadStop = false;
+		}
+
+		private void filtrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeFiltration = !_activeFiltration;
+			if (_activeFiltration)
+			{
+				filtrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				filtrationBtn.Text = "Filtrování";
+			}
+			reload();
+		}
+
+		private void dateFromDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeFiltration)
+			{
+				reload();
+			}
+		}
+
+		private void dateToDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeFiltration)
+			{
+				reload();
+			}
+		}
+
+		private void typeCb_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeFiltration && !_reloadStop)
+			{
+				reload();
+			}
+		}
+
+		private void mainTc_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			typeCb.Enabled = mainTc.SelectedIndex == 0;
 		}
 	}
 }
