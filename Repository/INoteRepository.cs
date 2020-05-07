@@ -7,7 +7,7 @@ namespace Eli.TimeManagement.Repository
 {
 	public interface INoteRepository
 	{
-		IList<Note> GetAll();
+		IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo);
 		void Add(Note newNote);
 		void Edit(Note editNote);
 		void Delete(int id);

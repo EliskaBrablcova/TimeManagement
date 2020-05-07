@@ -55,9 +55,23 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(notes);
 		}
 
-		public IList<Note> GetAll()
+		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo)
 		{
-			return readFromFile();
+			var notes = readFromFile();
+			if (dateFrom == null && dateTo == null)
+			{
+				return notes;
+			}
+			var toReturn = new List<Note>();
+			for (int i = 0; i < notes.Count; i++)
+			{
+				var note = notes[i];
+				if ((dateFrom == null || note.Edited.Date >= dateFrom) && (dateTo == null || note.Edited.Date <= dateTo))
+				{
+					toReturn.Add(note);
+				}
+			}
+			return toReturn;
 		}
 		private List<Note> readFromFile()
 		{

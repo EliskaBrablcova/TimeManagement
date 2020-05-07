@@ -74,10 +74,10 @@ namespace Eli.TimeManagement.Repository
 			return types;
 		}
 
-		public IList<Record> GetAll(string type)
+		public IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo)
 		{
 			var AllRecords = readFromFile();
-			if (type == null)
+			if (type == null && dateFrom == null && dateTo == null)
 			{
 				return AllRecords;
 			}
@@ -85,7 +85,9 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < AllRecords.Count; i++)
 			{
 				var record = AllRecords[i];
-				if (record.Type == type)
+				if ((type == null || record.Type == type) 
+					&& (dateFrom == null || record.Start >= dateFrom) 
+					&& (dateTo == null || record.Start <= dateFrom))
 				{
 					toReturn.Add(record);
 				}

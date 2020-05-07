@@ -31,8 +31,8 @@ namespace Eli.TimeManagement.App
 		}
 		private void reload()
 		{
-			var records = _repo.GetAll(null);
-			var notes = _noteRepo.GetAll();
+			var records = _repo.GetAll(null, null, null);
+			var notes = _noteRepo.GetAll(null, null);
 			_records = records;
 			_notes = notes;
 			display(records);
