@@ -51,8 +51,8 @@ namespace Eli.TimeManagement.App
 		{
 			if (_activeFiltration)
 			{
-				var dateFrom = dateFromDtp.Value.Date;
-				var dateTo = dateToDtp.Value.Date;
+				var dateFrom = dateFromDtp.NullableValue?.Date;
+				var dateTo = dateToDtp.NullableValue?.Date;
 				var type = typeCb.Text;
 				if (type == "")
 				{

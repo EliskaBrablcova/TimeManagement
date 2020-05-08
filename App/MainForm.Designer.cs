@@ -50,8 +50,8 @@
 			this.noteTextCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.editNoteBtn = new System.Windows.Forms.Button();
 			this.deleteNoteBtn = new System.Windows.Forms.Button();
-			this.dateToDtp = new System.Windows.Forms.DateTimePicker();
-			this.dateFromDtp = new System.Windows.Forms.DateTimePicker();
+			this.dateToDtp = new Eli.TimeManagement.App.NullableDateTimePicker();
+			this.dateFromDtp = new Eli.TimeManagement.App.NullableDateTimePicker();
 			this.filtrationBtn = new System.Windows.Forms.Button();
 			this.typeCb = new System.Windows.Forms.ComboBox();
 			this.filtrationGB = new System.Windows.Forms.GroupBox();
@@ -459,8 +459,8 @@
 		private System.Windows.Forms.ColumnHeader noteTextCh;
 		private System.Windows.Forms.Button editNoteBtn;
 		private System.Windows.Forms.Button deleteNoteBtn;
-		private System.Windows.Forms.DateTimePicker dateToDtp;
-		private System.Windows.Forms.DateTimePicker dateFromDtp;
+		private Eli.TimeManagement.App.NullableDateTimePicker dateToDtp;
+		private Eli.TimeManagement.App.NullableDateTimePicker dateFromDtp;
 		private System.Windows.Forms.Button filtrationBtn;
 		private System.Windows.Forms.ComboBox typeCb;
 		private System.Windows.Forms.GroupBox filtrationGB;
