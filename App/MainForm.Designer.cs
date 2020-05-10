@@ -411,7 +411,6 @@
 			// 
 			// statisticsBtn
 			// 
-			this.statisticsBtn.Enabled = false;
 			this.statisticsBtn.Location = new System.Drawing.Point(3, 93);
 			this.statisticsBtn.Name = "statisticsBtn";
 			this.statisticsBtn.Size = new System.Drawing.Size(189, 23);

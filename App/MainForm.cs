@@ -1,4 +1,5 @@
 ﻿using Eli.TimeManagement.Models.Entities;
+using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
 using System;
 using System.Collections.Generic;
@@ -340,7 +341,8 @@ namespace Eli.TimeManagement.App
 
 		private void statisticsBtn_Click(object sender, EventArgs e)
 		{
-
+			var dialogue = new StatisticsForm(new RecordStats());
+			dialogue.ShowDialog();
 		}
 	}
 }
