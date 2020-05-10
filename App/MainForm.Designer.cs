@@ -59,6 +59,7 @@
 			this.dateFromLbl = new System.Windows.Forms.Label();
 			this.typeLbl = new System.Windows.Forms.Label();
 			this.dateToLbl = new System.Windows.Forms.Label();
+			this.statisticsBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -84,7 +85,7 @@
 			this.recordsLv.Location = new System.Drawing.Point(198, 3);
 			this.recordsLv.MultiSelect = false;
 			this.recordsLv.Name = "recordsLv";
-			this.recordsTlp.SetRowSpan(this.recordsLv, 4);
+			this.recordsTlp.SetRowSpan(this.recordsLv, 5);
 			this.recordsLv.Size = new System.Drawing.Size(463, 288);
 			this.recordsLv.TabIndex = 0;
 			this.recordsLv.UseCompatibleStateImageBehavior = false;
@@ -195,6 +196,7 @@
 			this.recordsTlp.ColumnCount = 2;
 			this.recordsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
 			this.recordsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.recordsTlp.Controls.Add(this.statisticsBtn, 0, 3);
 			this.recordsTlp.Controls.Add(this.createRecordBtn, 0, 0);
 			this.recordsTlp.Controls.Add(this.recordsLv, 1, 0);
 			this.recordsTlp.Controls.Add(this.editRecordBtn, 0, 1);
@@ -202,14 +204,12 @@
 			this.recordsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.recordsTlp.Location = new System.Drawing.Point(3, 3);
 			this.recordsTlp.Name = "recordsTlp";
-			this.recordsTlp.RowCount = 4;
+			this.recordsTlp.RowCount = 5;
+			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.recordsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.recordsTlp.Size = new System.Drawing.Size(664, 294);
 			this.recordsTlp.TabIndex = 0;
 			// 
@@ -409,6 +409,17 @@
 			this.dateToLbl.Text = "Datum do";
 			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// statisticsBtn
+			// 
+			this.statisticsBtn.Enabled = false;
+			this.statisticsBtn.Location = new System.Drawing.Point(3, 93);
+			this.statisticsBtn.Name = "statisticsBtn";
+			this.statisticsBtn.Size = new System.Drawing.Size(189, 23);
+			this.statisticsBtn.TabIndex = 5;
+			this.statisticsBtn.Text = "Statistiky";
+			this.statisticsBtn.UseVisualStyleBackColor = true;
+			this.statisticsBtn.Click += new System.EventHandler(this.statisticsBtn_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -468,6 +479,7 @@
 		private System.Windows.Forms.Label dateFromLbl;
 		private System.Windows.Forms.Label typeLbl;
 		private System.Windows.Forms.Label dateToLbl;
+		private System.Windows.Forms.Button statisticsBtn;
 	}
 }
 

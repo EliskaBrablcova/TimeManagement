@@ -337,5 +337,10 @@ namespace Eli.TimeManagement.App
 		{
 			typeCb.Enabled = mainTc.SelectedIndex == 0;
 		}
+
+		private void statisticsBtn_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
