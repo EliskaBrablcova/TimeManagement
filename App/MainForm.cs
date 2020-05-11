@@ -1,4 +1,5 @@
 ﻿using Eli.TimeManagement.Models.Entities;
+using Eli.TimeManagement.Models.Stats;
 using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
 using System;
@@ -50,37 +51,44 @@ namespace Eli.TimeManagement.App
 
 		private IList<Record> getRecords()
 		{
-			if (_activeFiltration)
-			{
-				var dateFrom = dateFromDtp.Value.Date;
-				var dateTo = dateToDtp.Value.Date;
-				var type = typeCb.Text;
-				if (type == "")
-				{
-					type = null;
-				}
-				return _repo.GetAll(type, dateFrom, dateTo);
-			}
-			else
-			{
-				return _repo.GetAll(null, null, null);
-			}
+			var dateFrom = getDateFrom();
+			var dateTo = getDateTo();
+			var type = getType();
+			return _repo.GetAll(type, dateFrom, dateTo);
 		}
 
 		private IList<Note> getNotes()
 		{
-			if (_activeFiltration)
-			{
-				var dateFrom = dateFromDtp.Value.Date;
-				var dateTo = dateToDtp.Value.Date;
-				return _noteRepo.GetAll(dateFrom, dateTo);
-			}
-			else
-			{
-				return _noteRepo.GetAll(null, null);
-			}
+			var dateFrom = getDateFrom();
+			var dateTo = getDateTo();
+			return _noteRepo.GetAll(dateFrom, dateTo);
 		}
 
+		private DateTime? getDateFrom()
+		{
+			return _activeFiltration
+				? dateFromDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private DateTime? getDateTo()
+		{
+			return _activeFiltration
+				? dateToDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private string getType()
+		{
+			var type = _activeFiltration
+				? typeCb.Text
+				: null;
+			if (type == "")
+			{
+				type = null;
+			}
+			return type;
+		}
 		private void display(IList<Record> records)
 		{
 			recordsLv.Items.Clear();
@@ -341,7 +349,9 @@ namespace Eli.TimeManagement.App
 
 		private void statisticsBtn_Click(object sender, EventArgs e)
 		{
-			var dialogue = new StatisticsForm(new RecordStats());
+			var statsCounter = new StatisticsCounter();
+			var stats = statsCounter.Count(getRecords(), getDateFrom(), getDateTo());
+			var dialogue = new StatisticsForm(stats);
 			dialogue.ShowDialog();
 		}
 	}
