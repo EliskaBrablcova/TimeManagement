@@ -51,6 +51,7 @@ namespace Eli.TimeManagement.Models.Stats
 			stats.ActiveDaysPercent = daysTotal > 0
 				? activeDaysTotal / (double)daysTotal * 100
 				: 0.0;
+			stats.TypesStats = count(records);
 			return stats;
 		}
 
@@ -85,6 +86,36 @@ namespace Eli.TimeManagement.Models.Stats
 		private int getDaysDiff(DateTime dateFrom, DateTime dateTo)
 		{
 			return (int) (dateTo - dateFrom).TotalDays + 1;
+		}
+
+		private List<TypeStats> count(IList<Record> records)
+		{
+			var dict = new Dictionary<string, int>();
+			var total = 0;
+			foreach (var record in records)
+			{
+				total += record.MinutesTotal;
+				if (dict.ContainsKey(record.Type))
+				{
+					dict[record.Type] += record.MinutesTotal;
+				}
+				else
+				{
+					dict.Add(record.Type, record.MinutesTotal);
+				}
+			}
+			var stats = new List<TypeStats>();
+			foreach (var typeStats in dict)
+			{
+				var stat = new TypeStats();
+				stat.Type = typeStats.Key;
+				stat.Minutes = typeStats.Value;
+				stat.Percent = total > 0
+					? typeStats.Value / (double)total * 100
+					: 0.0;
+				stats.Add(stat);
+			}
+			return stats;
 		}
 	}
 }

@@ -45,7 +45,7 @@
 			this.statisticsTypesLv = new System.Windows.Forms.ListView();
 			this.typeCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.percentCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.countCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.minutesCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.statisticsTlp.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -208,7 +208,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.statisticsTypesLv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.typeCh,
-            this.countCh,
+            this.minutesCh,
             this.percentCh});
 			this.statisticsTypesLv.Location = new System.Drawing.Point(12, 154);
 			this.statisticsTypesLv.MultiSelect = false;
@@ -221,17 +221,17 @@
 			// typeCh
 			// 
 			this.typeCh.Text = "Typ aktivit";
-			this.typeCh.Width = 155;
+			this.typeCh.Width = 191;
 			// 
 			// percentCh
 			// 
 			this.percentCh.Text = "%";
-			this.percentCh.Width = 46;
+			this.percentCh.Width = 49;
 			// 
-			// countCh
+			// minutesCh
 			// 
-			this.countCh.Text = "Počet";
-			this.countCh.Width = 46;
+			this.minutesCh.Text = "Suma minut";
+			this.minutesCh.Width = 67;
 			// 
 			// StatisticsForm
 			// 
@@ -268,7 +268,7 @@
 		private System.Windows.Forms.Label minutesTotalLbl;
 		private System.Windows.Forms.ListView statisticsTypesLv;
 		private System.Windows.Forms.ColumnHeader typeCh;
-		private System.Windows.Forms.ColumnHeader countCh;
+		private System.Windows.Forms.ColumnHeader minutesCh;
 		private System.Windows.Forms.ColumnHeader percentCh;
 	}
 }
