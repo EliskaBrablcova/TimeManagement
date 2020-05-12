@@ -163,7 +163,7 @@
 			this.versionLbl.Name = "versionLbl";
 			this.versionLbl.Size = new System.Drawing.Size(28, 13);
 			this.versionLbl.TabIndex = 5;
-			this.versionLbl.Text = "v1.1";
+			this.versionLbl.Text = "v1.2";
 			// 
 			// mainTc
 			// 
