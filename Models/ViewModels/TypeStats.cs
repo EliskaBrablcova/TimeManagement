@@ -8,5 +8,6 @@ namespace Eli.TimeManagement.Models.ViewModels
 	{
 		public string Type { get; set; }
 		public double Percent { get; set; }
+		public int Count { get; set; }
 	}
 }
