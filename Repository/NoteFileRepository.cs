@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Eli.TimeManagement.Repository
@@ -57,7 +58,7 @@ namespace Eli.TimeManagement.Repository
 
 		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo)
 		{
-			var notes = readFromFile();
+			var notes = readFromFileOrdered();
 			if (dateFrom == null && dateTo == null)
 			{
 				return notes;
@@ -72,6 +73,12 @@ namespace Eli.TimeManagement.Repository
 				}
 			}
 			return toReturn;
+		}
+
+		private List<Note> readFromFileOrdered()
+		{
+			var notes = readFromFile();
+			return notes.OrderByDescending(c => c.Edited).ThenBy(c => c.ID).ToList();
 		}
 		private List<Note> readFromFile()
 		{
