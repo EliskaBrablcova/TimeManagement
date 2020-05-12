@@ -42,6 +42,7 @@
 			this.mainTc = new System.Windows.Forms.TabControl();
 			this.recordsTP = new System.Windows.Forms.TabPage();
 			this.recordsTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.statisticsBtn = new System.Windows.Forms.Button();
 			this.notesTP = new System.Windows.Forms.TabPage();
 			this.notesTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.createNoteBtn = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
 			this.dateFromLbl = new System.Windows.Forms.Label();
 			this.typeLbl = new System.Windows.Forms.Label();
 			this.dateToLbl = new System.Windows.Forms.Label();
-			this.statisticsBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -213,6 +213,16 @@
 			this.recordsTlp.Size = new System.Drawing.Size(664, 294);
 			this.recordsTlp.TabIndex = 0;
 			// 
+			// statisticsBtn
+			// 
+			this.statisticsBtn.Location = new System.Drawing.Point(3, 93);
+			this.statisticsBtn.Name = "statisticsBtn";
+			this.statisticsBtn.Size = new System.Drawing.Size(189, 23);
+			this.statisticsBtn.TabIndex = 5;
+			this.statisticsBtn.Text = "Statistiky";
+			this.statisticsBtn.UseVisualStyleBackColor = true;
+			this.statisticsBtn.Click += new System.EventHandler(this.statisticsBtn_Click);
+			// 
 			// notesTP
 			// 
 			this.notesTP.Controls.Add(this.notesTlp);
@@ -312,6 +322,8 @@
 			// 
 			// dateToDtp
 			// 
+			this.dateToDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateToDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
 			this.dateToDtp.Location = new System.Drawing.Point(83, 29);
 			this.dateToDtp.Name = "dateToDtp";
 			this.dateToDtp.Size = new System.Drawing.Size(200, 20);
@@ -320,6 +332,8 @@
 			// 
 			// dateFromDtp
 			// 
+			this.dateFromDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateFromDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
 			this.dateFromDtp.Location = new System.Drawing.Point(83, 3);
 			this.dateFromDtp.Name = "dateFromDtp";
 			this.dateFromDtp.Size = new System.Drawing.Size(200, 20);
@@ -408,16 +422,6 @@
 			this.dateToLbl.TabIndex = 13;
 			this.dateToLbl.Text = "Datum do";
 			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// statisticsBtn
-			// 
-			this.statisticsBtn.Location = new System.Drawing.Point(3, 93);
-			this.statisticsBtn.Name = "statisticsBtn";
-			this.statisticsBtn.Size = new System.Drawing.Size(189, 23);
-			this.statisticsBtn.TabIndex = 5;
-			this.statisticsBtn.Text = "Statistiky";
-			this.statisticsBtn.UseVisualStyleBackColor = true;
-			this.statisticsBtn.Click += new System.EventHandler(this.statisticsBtn_Click);
 			// 
 			// MainForm
 			// 

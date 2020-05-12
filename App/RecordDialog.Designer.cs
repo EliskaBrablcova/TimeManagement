@@ -46,6 +46,7 @@
 			// startDtp
 			// 
 			this.startDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.startDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
 			this.startDtp.Location = new System.Drawing.Point(107, 3);
 			this.startDtp.Name = "startDtp";
 			this.startDtp.Size = new System.Drawing.Size(388, 20);

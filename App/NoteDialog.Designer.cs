@@ -40,7 +40,9 @@
 			// 
 			// dateDtp
 			// 
+			this.dateDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
 			this.dateDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateDtp.Location = new System.Drawing.Point(107, 3);
 			this.dateDtp.Name = "dateDtp";
 			this.dateDtp.Size = new System.Drawing.Size(388, 20);
