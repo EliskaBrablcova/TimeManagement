@@ -132,6 +132,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.MinimumSize = new System.Drawing.Size(378, 182);
 			this.Name = "NoteDialog";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "NoteDialog";
 			this.Load += new System.EventHandler(this.NoteDialog_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
