@@ -48,7 +48,7 @@ namespace Eli.TimeManagement.App
 			_checkItems = items;
 			display(records);
 			display(notes);
-			display(items);
+			display(items, _checkItemRepo.GetAllTypes());
 			setRecordButtonStates();
 			setNotesButtonStates();
 			setCheckItemsButtonStates();
@@ -118,9 +118,14 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
-		private void display(IList<CheckItem> items)
+		private void display(IList<CheckItem> items, IList<string> types)
 		{
 			checklistLv.Items.Clear();
+			checklistLv.Groups.Clear();
+			foreach (var type in types)
+			{
+				checklistLv.Groups.Add(type, type);
+			}
 			for (int i = 0; i < items.Count; i++)
 			{
 				addRow(items[i]);
@@ -145,6 +150,7 @@ namespace Eli.TimeManagement.App
 		{
 			var texts = new string[] { checkItem.Completed.ToString(), checkItem.Text.Replace("\r\n", " ") };
 			var item = new ListViewItem(texts);
+			item.Group = checklistLv.Groups[checkItem.Type];
 			checklistLv.Items.Add(item);
 		}
 
