@@ -12,5 +12,6 @@ namespace Eli.TimeManagement.Repository
 		void Edit(CheckItem editCheckItem);
 		void Delete(int id);
 		void Complete(int id);
+		IList<string> GetAllTypes();
 	}
 }

@@ -87,6 +87,21 @@ namespace Eli.TimeManagement.Repository
 			}
 			return toReturn;
 		}
+		public IList<string> GetAllTypes()
+		{
+			var items = readFromFile();
+			var types = new List<string>();
+			for (int i = 0; i < items.Count; i++)
+			{
+				var item = items[i];
+				if (item.Type != null && !types.Contains(item.Type))
+				{
+					types.Add(item.Type);
+				}
+			}
+			types.Sort();
+			return types;
+		}
 
 		private List<CheckItem> readFromFileOrdered()
 		{
