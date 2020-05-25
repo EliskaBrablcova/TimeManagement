@@ -19,8 +19,10 @@ namespace Eli.TimeManagement.App
 	{
 		private ITimeManagementRepository _repo;
 		private INoteRepository _noteRepo;
+		private ICheckItemRepository _checkItemRepo;
 		private IList<Record> _records;
 		private IList<Note> _notes;
+		private IList<CheckItem> _checkItems;
 		private bool _activeFiltration;
 		private bool _reloadStop;
 		public MainForm()
@@ -28,6 +30,7 @@ namespace Eli.TimeManagement.App
 			InitializeComponent();
 			_repo = new TimeManagementFileRepository("data\\data.json");
 			_noteRepo = new NoteFileRepository("data\\notes.json");
+			_checkItemRepo = new CheckItemFileRepository("data\\checklist.json");
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -38,16 +41,19 @@ namespace Eli.TimeManagement.App
 		{
 			var records = getRecords();
 			var notes = getNotes();
+			var items = getCheckItems();
 			var types = _repo.GetAllTypes();
 			_records = records;
 			_notes = notes;
+			_checkItems = items;
 			display(records);
 			display(notes);
+			display(items);
 			setRecordButtonStates();
 			setNotesButtonStates();
+			setCheckItemsButtonStates();
 			setFiltrationTypes(types);
 		}
-
 
 		private IList<Record> getRecords()
 		{
@@ -62,6 +68,11 @@ namespace Eli.TimeManagement.App
 			var dateFrom = getDateFrom();
 			var dateTo = getDateTo();
 			return _noteRepo.GetAll(dateFrom, dateTo);
+		}
+
+		private IList<CheckItem> getCheckItems()
+		{
+			return _checkItemRepo.GetAll(false);
 		}
 
 		private DateTime? getDateFrom()
@@ -107,6 +118,14 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
+		private void display(IList<CheckItem> items)
+		{
+			checklistLv.Items.Clear();
+			for (int i = 0; i < items.Count; i++)
+			{
+				addRow(items[i]);
+			}
+		}
 
 		private void addRow(Record record)
 		{
@@ -120,6 +139,13 @@ namespace Eli.TimeManagement.App
 			var texts = new string[] { note.Edited.ToString(), note.Text.Replace("\r\n", " ") };
 			var item = new ListViewItem(texts);
 			notesLv.Items.Add(item);
+		}
+
+		private void addRow(CheckItem checkItem)
+		{
+			var texts = new string[] { checkItem.Completed.ToString(), checkItem.Text.Replace("\r\n", " ") };
+			var item = new ListViewItem(texts);
+			checklistLv.Items.Add(item);
 		}
 
 		private void deleteRecordBtn_Click(object sender, EventArgs e)
@@ -159,6 +185,19 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
+		private void setCheckItemsButtonStates()
+		{
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				setCheckItemsButtonStates(true);
+			}
+			else
+			{
+				setCheckItemsButtonStates(false);
+			}
+		}
+
 
 		private void setRecordButtonStates(bool enabled)
 		{
@@ -170,6 +209,12 @@ namespace Eli.TimeManagement.App
 		{
 			deleteNoteBtn.Enabled = enabled;
 			editNoteBtn.Enabled = enabled;
+		}
+
+		private void setCheckItemsButtonStates(bool enabled)
+		{
+			deleteCheckItemBtn.Enabled = enabled;
+			editCheckItemBtn.Enabled = enabled;
 		}
 
 		private void createRecordBtn_Click(object sender, EventArgs e)
@@ -353,6 +398,75 @@ namespace Eli.TimeManagement.App
 			var stats = statsCounter.Count(getRecords(), getDateFrom(), getDateTo());
 			var dialogue = new StatisticsForm(stats);
 			dialogue.ShowDialog();
+		}
+
+		private void createCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			var dialog = new CheckItemDialog(new CheckItem(), false, _checkItemRepo.GetAllTypes());
+			var result = dialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				_checkItemRepo.Add(dialog.Item);
+				reload();
+			}
+		}
+
+		private void editCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var selectedIndex = selected[0];
+				var checkItem = _checkItems[selectedIndex];
+
+				var dialog = new CheckItemDialog(checkItem, true, _checkItemRepo.GetAllTypes());
+				var result = dialog.ShowDialog();
+				if (result == DialogResult.OK)
+				{
+					_checkItemRepo.Edit(dialog.Item);
+					reload();
+				}
+			}
+		}
+
+		private void deleteCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			deleteCheckItem();
+		}
+
+		private void completeCheckItemBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+		private void deleteCheckItem()
+		{
+			setCheckItemsButtonStates(false);
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var result = MessageBox.Show("Opravdu chcete smazat úkol?", "Varování", MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes)
+				{
+					var selectedIndex = selected[0];
+					var id = _checkItems[selectedIndex].ID;
+					_checkItemRepo.Delete(id);
+					reload();
+				}
+			}
+			setCheckItemsButtonStates();
+		}
+
+		private void checklistLv_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				deleteCheckItem();
+			}
+		}
+
+		private void checklistLv_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			setCheckItemsButtonStates();
 		}
 	}
 }

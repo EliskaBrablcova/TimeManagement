@@ -30,7 +30,7 @@ namespace Eli.TimeManagement.App
 			} 
 		}
 
-		public CheckItemDialog(CheckItem item, bool isEdit)
+		public CheckItemDialog(CheckItem item, bool isEdit, IList<string> types)
 		{
 			InitializeComponent();
 			if (item == null)
@@ -45,6 +45,13 @@ namespace Eli.TimeManagement.App
 			else
 			{
 				Text = "Založení úkolu";
+			}
+			if (types != null)
+			{
+				for (int i = 0; i < types.Count; i++)
+				{
+					checkItemTypeCB.Items.Add(types[i]);
+				}
 			}
 		}
 		private void okBtn_Click(object sender, EventArgs e)
@@ -63,14 +70,14 @@ namespace Eli.TimeManagement.App
 		{
 			checkItemTextTB.Text = Item.Text;
 			checkItemCompletedCB.Checked = Item.Completed;
-			checkItemTypeCB.Text = Item.Text;
+			checkItemTypeCB.Text = Item.Type;
 		}
 
 		private void setItem()
 		{
 			Item.Text = checkItemTextTB.Text;
 			Item.Completed = checkItemCompletedCB.Checked;
-			Item.Text = checkItemTypeCB.Text;
+			Item.Type = checkItemTypeCB.Text;
 		}
 	}
 }

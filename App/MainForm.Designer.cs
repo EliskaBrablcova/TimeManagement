@@ -51,15 +51,6 @@
 			this.noteTextCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.editNoteBtn = new System.Windows.Forms.Button();
 			this.deleteNoteBtn = new System.Windows.Forms.Button();
-			this.dateToDtp = new System.Windows.Forms.DateTimePicker();
-			this.dateFromDtp = new System.Windows.Forms.DateTimePicker();
-			this.filtrationBtn = new System.Windows.Forms.Button();
-			this.typeCb = new System.Windows.Forms.ComboBox();
-			this.filtrationGB = new System.Windows.Forms.GroupBox();
-			this.filtrationTlp = new System.Windows.Forms.TableLayoutPanel();
-			this.dateFromLbl = new System.Windows.Forms.Label();
-			this.typeLbl = new System.Windows.Forms.Label();
-			this.dateToLbl = new System.Windows.Forms.Label();
 			this.checklistTP = new System.Windows.Forms.TabPage();
 			this.checklistTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.createCheckItemBtn = new System.Windows.Forms.Button();
@@ -69,16 +60,25 @@
 			this.editCheckItemBtn = new System.Windows.Forms.Button();
 			this.deleteCheckItemBtn = new System.Windows.Forms.Button();
 			this.completeCheckItemBtn = new System.Windows.Forms.Button();
+			this.dateToDtp = new System.Windows.Forms.DateTimePicker();
+			this.dateFromDtp = new System.Windows.Forms.DateTimePicker();
+			this.filtrationBtn = new System.Windows.Forms.Button();
+			this.typeCb = new System.Windows.Forms.ComboBox();
+			this.filtrationGB = new System.Windows.Forms.GroupBox();
+			this.filtrationTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.dateFromLbl = new System.Windows.Forms.Label();
+			this.typeLbl = new System.Windows.Forms.Label();
+			this.dateToLbl = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
 			this.recordsTlp.SuspendLayout();
 			this.notesTP.SuspendLayout();
 			this.notesTlp.SuspendLayout();
-			this.filtrationGB.SuspendLayout();
-			this.filtrationTlp.SuspendLayout();
 			this.checklistTP.SuspendLayout();
 			this.checklistTlp.SuspendLayout();
+			this.filtrationGB.SuspendLayout();
+			this.filtrationTlp.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// recordsLv
@@ -332,6 +332,112 @@
 			this.deleteNoteBtn.UseVisualStyleBackColor = true;
 			this.deleteNoteBtn.Click += new System.EventHandler(this.deleteNoteBtn_Click);
 			// 
+			// checklistTP
+			// 
+			this.checklistTP.Controls.Add(this.checklistTlp);
+			this.checklistTP.Location = new System.Drawing.Point(4, 22);
+			this.checklistTP.Name = "checklistTP";
+			this.checklistTP.Size = new System.Drawing.Size(670, 300);
+			this.checklistTP.TabIndex = 2;
+			this.checklistTP.Text = "Úkoly";
+			this.checklistTP.UseVisualStyleBackColor = true;
+			// 
+			// checklistTlp
+			// 
+			this.checklistTlp.ColumnCount = 2;
+			this.checklistTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+			this.checklistTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.checklistTlp.Controls.Add(this.createCheckItemBtn, 0, 0);
+			this.checklistTlp.Controls.Add(this.checklistLv, 1, 0);
+			this.checklistTlp.Controls.Add(this.editCheckItemBtn, 0, 1);
+			this.checklistTlp.Controls.Add(this.deleteCheckItemBtn, 0, 2);
+			this.checklistTlp.Controls.Add(this.completeCheckItemBtn, 0, 3);
+			this.checklistTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checklistTlp.Location = new System.Drawing.Point(0, 0);
+			this.checklistTlp.Name = "checklistTlp";
+			this.checklistTlp.RowCount = 5;
+			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.checklistTlp.Size = new System.Drawing.Size(670, 300);
+			this.checklistTlp.TabIndex = 2;
+			// 
+			// createCheckItemBtn
+			// 
+			this.createCheckItemBtn.Location = new System.Drawing.Point(3, 3);
+			this.createCheckItemBtn.Name = "createCheckItemBtn";
+			this.createCheckItemBtn.Size = new System.Drawing.Size(189, 23);
+			this.createCheckItemBtn.TabIndex = 2;
+			this.createCheckItemBtn.Text = "Nový záznam";
+			this.createCheckItemBtn.UseVisualStyleBackColor = true;
+			this.createCheckItemBtn.Click += new System.EventHandler(this.createCheckItemBtn_Click);
+			// 
+			// checklistLv
+			// 
+			this.checklistLv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.checklistLv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.checkItemCompletedCh,
+            this.checkItemTextCh});
+			this.checklistLv.FullRowSelect = true;
+			this.checklistLv.HideSelection = false;
+			this.checklistLv.Location = new System.Drawing.Point(198, 3);
+			this.checklistLv.MultiSelect = false;
+			this.checklistLv.Name = "checklistLv";
+			this.checklistTlp.SetRowSpan(this.checklistLv, 5);
+			this.checklistLv.Size = new System.Drawing.Size(469, 294);
+			this.checklistLv.TabIndex = 0;
+			this.checklistLv.UseCompatibleStateImageBehavior = false;
+			this.checklistLv.View = System.Windows.Forms.View.Details;
+			this.checklistLv.SelectedIndexChanged += new System.EventHandler(this.checklistLv_SelectedIndexChanged);
+			this.checklistLv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checklistLv_KeyDown);
+			// 
+			// checkItemCompletedCh
+			// 
+			this.checkItemCompletedCh.Text = "Dokončeno";
+			this.checkItemCompletedCh.Width = 69;
+			// 
+			// checkItemTextCh
+			// 
+			this.checkItemTextCh.Text = "Text";
+			this.checkItemTextCh.Width = 393;
+			// 
+			// editCheckItemBtn
+			// 
+			this.editCheckItemBtn.Enabled = false;
+			this.editCheckItemBtn.Location = new System.Drawing.Point(3, 33);
+			this.editCheckItemBtn.Name = "editCheckItemBtn";
+			this.editCheckItemBtn.Size = new System.Drawing.Size(189, 23);
+			this.editCheckItemBtn.TabIndex = 3;
+			this.editCheckItemBtn.Text = "Editace";
+			this.editCheckItemBtn.UseVisualStyleBackColor = true;
+			this.editCheckItemBtn.Click += new System.EventHandler(this.editCheckItemBtn_Click);
+			// 
+			// deleteCheckItemBtn
+			// 
+			this.deleteCheckItemBtn.Enabled = false;
+			this.deleteCheckItemBtn.Location = new System.Drawing.Point(3, 63);
+			this.deleteCheckItemBtn.Name = "deleteCheckItemBtn";
+			this.deleteCheckItemBtn.Size = new System.Drawing.Size(189, 23);
+			this.deleteCheckItemBtn.TabIndex = 4;
+			this.deleteCheckItemBtn.Text = "Smazání";
+			this.deleteCheckItemBtn.UseVisualStyleBackColor = true;
+			this.deleteCheckItemBtn.Click += new System.EventHandler(this.deleteCheckItemBtn_Click);
+			// 
+			// completeCheckItemBtn
+			// 
+			this.completeCheckItemBtn.Enabled = false;
+			this.completeCheckItemBtn.Location = new System.Drawing.Point(3, 93);
+			this.completeCheckItemBtn.Name = "completeCheckItemBtn";
+			this.completeCheckItemBtn.Size = new System.Drawing.Size(189, 23);
+			this.completeCheckItemBtn.TabIndex = 5;
+			this.completeCheckItemBtn.Text = "Dokončení";
+			this.completeCheckItemBtn.UseVisualStyleBackColor = true;
+			this.completeCheckItemBtn.Click += new System.EventHandler(this.completeCheckItemBtn_Click);
+			// 
 			// dateToDtp
 			// 
 			this.dateToDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
@@ -435,106 +541,6 @@
 			this.dateToLbl.Text = "Datum do";
 			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// checklistTP
-			// 
-			this.checklistTP.Controls.Add(this.checklistTlp);
-			this.checklistTP.Location = new System.Drawing.Point(4, 22);
-			this.checklistTP.Name = "checklistTP";
-			this.checklistTP.Size = new System.Drawing.Size(670, 300);
-			this.checklistTP.TabIndex = 2;
-			this.checklistTP.Text = "Úkoly";
-			this.checklistTP.UseVisualStyleBackColor = true;
-			// 
-			// checklistTlp
-			// 
-			this.checklistTlp.ColumnCount = 2;
-			this.checklistTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-			this.checklistTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.checklistTlp.Controls.Add(this.createCheckItemBtn, 0, 0);
-			this.checklistTlp.Controls.Add(this.checklistLv, 1, 0);
-			this.checklistTlp.Controls.Add(this.editCheckItemBtn, 0, 1);
-			this.checklistTlp.Controls.Add(this.deleteCheckItemBtn, 0, 2);
-			this.checklistTlp.Controls.Add(this.completeCheckItemBtn, 0, 3);
-			this.checklistTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checklistTlp.Location = new System.Drawing.Point(0, 0);
-			this.checklistTlp.Name = "checklistTlp";
-			this.checklistTlp.RowCount = 5;
-			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.checklistTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.checklistTlp.Size = new System.Drawing.Size(670, 300);
-			this.checklistTlp.TabIndex = 2;
-			// 
-			// createCheckItemBtn
-			// 
-			this.createCheckItemBtn.Location = new System.Drawing.Point(3, 3);
-			this.createCheckItemBtn.Name = "createCheckItemBtn";
-			this.createCheckItemBtn.Size = new System.Drawing.Size(189, 23);
-			this.createCheckItemBtn.TabIndex = 2;
-			this.createCheckItemBtn.Text = "Nový záznam";
-			this.createCheckItemBtn.UseVisualStyleBackColor = true;
-			// 
-			// checklistLv
-			// 
-			this.checklistLv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.checklistLv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.checkItemCompletedCh,
-            this.checkItemTextCh});
-			this.checklistLv.FullRowSelect = true;
-			this.checklistLv.HideSelection = false;
-			this.checklistLv.Location = new System.Drawing.Point(198, 3);
-			this.checklistLv.MultiSelect = false;
-			this.checklistLv.Name = "checklistLv";
-			this.checklistTlp.SetRowSpan(this.checklistLv, 5);
-			this.checklistLv.Size = new System.Drawing.Size(469, 294);
-			this.checklistLv.TabIndex = 0;
-			this.checklistLv.UseCompatibleStateImageBehavior = false;
-			this.checklistLv.View = System.Windows.Forms.View.Details;
-			// 
-			// checkItemCompletedCh
-			// 
-			this.checkItemCompletedCh.Text = "Dokončeno";
-			this.checkItemCompletedCh.Width = 69;
-			// 
-			// checkItemTextCh
-			// 
-			this.checkItemTextCh.Text = "Text";
-			this.checkItemTextCh.Width = 393;
-			// 
-			// editCheckItemBtn
-			// 
-			this.editCheckItemBtn.Enabled = false;
-			this.editCheckItemBtn.Location = new System.Drawing.Point(3, 33);
-			this.editCheckItemBtn.Name = "editCheckItemBtn";
-			this.editCheckItemBtn.Size = new System.Drawing.Size(189, 23);
-			this.editCheckItemBtn.TabIndex = 3;
-			this.editCheckItemBtn.Text = "Editace";
-			this.editCheckItemBtn.UseVisualStyleBackColor = true;
-			// 
-			// deleteCheckItemBtn
-			// 
-			this.deleteCheckItemBtn.Enabled = false;
-			this.deleteCheckItemBtn.Location = new System.Drawing.Point(3, 63);
-			this.deleteCheckItemBtn.Name = "deleteCheckItemBtn";
-			this.deleteCheckItemBtn.Size = new System.Drawing.Size(189, 23);
-			this.deleteCheckItemBtn.TabIndex = 4;
-			this.deleteCheckItemBtn.Text = "Smazání";
-			this.deleteCheckItemBtn.UseVisualStyleBackColor = true;
-			// 
-			// completeCheckItemBtn
-			// 
-			this.completeCheckItemBtn.Enabled = false;
-			this.completeCheckItemBtn.Location = new System.Drawing.Point(3, 93);
-			this.completeCheckItemBtn.Name = "completeCheckItemBtn";
-			this.completeCheckItemBtn.Size = new System.Drawing.Size(189, 23);
-			this.completeCheckItemBtn.TabIndex = 5;
-			this.completeCheckItemBtn.Text = "Dokončení";
-			this.completeCheckItemBtn.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,10 +561,10 @@
 			this.recordsTlp.ResumeLayout(false);
 			this.notesTP.ResumeLayout(false);
 			this.notesTlp.ResumeLayout(false);
-			this.filtrationGB.ResumeLayout(false);
-			this.filtrationTlp.ResumeLayout(false);
 			this.checklistTP.ResumeLayout(false);
 			this.checklistTlp.ResumeLayout(false);
+			this.filtrationGB.ResumeLayout(false);
+			this.filtrationTlp.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

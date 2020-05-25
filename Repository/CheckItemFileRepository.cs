@@ -106,7 +106,7 @@ namespace Eli.TimeManagement.Repository
 		private List<CheckItem> readFromFileOrdered()
 		{
 			var items = readFromFile();
-			return items.OrderBy(c => c.Type).ThenByDescending(c => c.Completed).ThenBy(c => c.ID).ToList();
+			return items.OrderBy(c => c.Type).ThenBy(c => c.Completed).ThenBy(c => c.ID).ToList();
 		}
 		private List<CheckItem> readFromFile()
 		{
