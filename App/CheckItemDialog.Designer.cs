@@ -32,10 +32,10 @@
 			this.cancelBtn = new System.Windows.Forms.Button();
 			this.okBtn = new System.Windows.Forms.Button();
 			this.checkItemDialogTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.checkItemTextTB = new System.Windows.Forms.TextBox();
 			this.checkItemTextLbl = new System.Windows.Forms.Label();
 			this.checkItemCompletedLbl = new System.Windows.Forms.Label();
 			this.checkItemCompletedCB = new System.Windows.Forms.CheckBox();
-			this.checkItemTextLblTB = new System.Windows.Forms.TextBox();
 			this.checkItemTypeLbl = new System.Windows.Forms.Label();
 			this.checkItemTypeCB = new System.Windows.Forms.ComboBox();
 			this.checkItemDialogTlp.SuspendLayout();
@@ -61,6 +61,7 @@
 			this.okBtn.TabIndex = 13;
 			this.okBtn.Text = "Uložit";
 			this.okBtn.UseVisualStyleBackColor = true;
+			this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
 			// 
 			// checkItemDialogTlp
 			// 
@@ -70,7 +71,7 @@
 			this.checkItemDialogTlp.ColumnCount = 2;
 			this.checkItemDialogTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
 			this.checkItemDialogTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.checkItemDialogTlp.Controls.Add(this.checkItemTextLblTB, 1, 2);
+			this.checkItemDialogTlp.Controls.Add(this.checkItemTextTB, 1, 2);
 			this.checkItemDialogTlp.Controls.Add(this.checkItemTextLbl, 0, 2);
 			this.checkItemDialogTlp.Controls.Add(this.checkItemCompletedLbl, 0, 0);
 			this.checkItemDialogTlp.Controls.Add(this.checkItemCompletedCB, 1, 0);
@@ -85,6 +86,15 @@
 			this.checkItemDialogTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.checkItemDialogTlp.Size = new System.Drawing.Size(324, 139);
 			this.checkItemDialogTlp.TabIndex = 14;
+			// 
+			// checkItemTextTB
+			// 
+			this.checkItemTextTB.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checkItemTextTB.Location = new System.Drawing.Point(107, 53);
+			this.checkItemTextTB.Multiline = true;
+			this.checkItemTextTB.Name = "checkItemTextTB";
+			this.checkItemTextTB.Size = new System.Drawing.Size(214, 83);
+			this.checkItemTextTB.TabIndex = 12;
 			// 
 			// checkItemTextLbl
 			// 
@@ -116,15 +126,6 @@
 			this.checkItemCompletedCB.TabIndex = 11;
 			this.checkItemCompletedCB.UseVisualStyleBackColor = true;
 			// 
-			// checkItemTextLblTB
-			// 
-			this.checkItemTextLblTB.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkItemTextLblTB.Location = new System.Drawing.Point(107, 53);
-			this.checkItemTextLblTB.Multiline = true;
-			this.checkItemTextLblTB.Name = "checkItemTextLblTB";
-			this.checkItemTextLblTB.Size = new System.Drawing.Size(214, 83);
-			this.checkItemTextLblTB.TabIndex = 12;
-			// 
 			// checkItemTypeLbl
 			// 
 			this.checkItemTypeLbl.AutoSize = true;
@@ -151,7 +152,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelBtn;
-			this.ClientSize = new System.Drawing.Size(348, 192);
+			this.ClientSize = new System.Drawing.Size(348, 215);
 			this.ControlBox = false;
 			this.Controls.Add(this.checkItemDialogTlp);
 			this.Controls.Add(this.okBtn);
@@ -161,6 +162,7 @@
 			this.MinimumSize = new System.Drawing.Size(364, 231);
 			this.Name = "CheckItemDialog";
 			this.Text = "CheckItemDialog";
+			this.Load += new System.EventHandler(this.CheckItemDialog_Load);
 			this.checkItemDialogTlp.ResumeLayout(false);
 			this.checkItemDialogTlp.PerformLayout();
 			this.ResumeLayout(false);
@@ -175,7 +177,7 @@
 		private System.Windows.Forms.Label checkItemTextLbl;
 		private System.Windows.Forms.Label checkItemCompletedLbl;
 		private System.Windows.Forms.CheckBox checkItemCompletedCB;
-		private System.Windows.Forms.TextBox checkItemTextLblTB;
+		private System.Windows.Forms.TextBox checkItemTextTB;
 		private System.Windows.Forms.Label checkItemTypeLbl;
 		private System.Windows.Forms.ComboBox checkItemTypeCB;
 	}
