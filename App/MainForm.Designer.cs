@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.recordsLv = new System.Windows.Forms.ListView();
 			this.recordDateCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,8 +56,6 @@
 			this.checklistTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.createCheckItemBtn = new System.Windows.Forms.Button();
 			this.checklistLv = new System.Windows.Forms.ListView();
-			this.checkItemCompletedCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.checkItemTextCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.editCheckItemBtn = new System.Windows.Forms.Button();
 			this.deleteCheckItemBtn = new System.Windows.Forms.Button();
 			this.completeCheckItemBtn = new System.Windows.Forms.Button();
@@ -69,6 +68,8 @@
 			this.dateFromLbl = new System.Windows.Forms.Label();
 			this.typeLbl = new System.Windows.Forms.Label();
 			this.dateToLbl = new System.Windows.Forms.Label();
+			this.checkedImageList = new System.Windows.Forms.ImageList(this.components);
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -380,30 +381,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.checklistLv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.checkItemCompletedCh,
-            this.checkItemTextCh});
+            this.columnHeader1});
 			this.checklistLv.FullRowSelect = true;
+			this.checklistLv.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.checklistLv.HideSelection = false;
 			this.checklistLv.Location = new System.Drawing.Point(198, 3);
 			this.checklistLv.MultiSelect = false;
 			this.checklistLv.Name = "checklistLv";
 			this.checklistTlp.SetRowSpan(this.checklistLv, 5);
 			this.checklistLv.Size = new System.Drawing.Size(469, 294);
+			this.checklistLv.StateImageList = this.checkedImageList;
 			this.checklistLv.TabIndex = 0;
 			this.checklistLv.UseCompatibleStateImageBehavior = false;
 			this.checklistLv.View = System.Windows.Forms.View.Details;
 			this.checklistLv.SelectedIndexChanged += new System.EventHandler(this.checklistLv_SelectedIndexChanged);
 			this.checklistLv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checklistLv_KeyDown);
-			// 
-			// checkItemCompletedCh
-			// 
-			this.checkItemCompletedCh.Text = "Dokončeno";
-			this.checkItemCompletedCh.Width = 69;
-			// 
-			// checkItemTextCh
-			// 
-			this.checkItemTextCh.Text = "Text";
-			this.checkItemTextCh.Width = 393;
 			// 
 			// editCheckItemBtn
 			// 
@@ -541,6 +533,18 @@
 			this.dateToLbl.Text = "Datum do";
 			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// checkedImageList
+			// 
+			this.checkedImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("checkedImageList.ImageStream")));
+			this.checkedImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.checkedImageList.Images.SetKeyName(0, "check_false.png");
+			this.checkedImageList.Images.SetKeyName(1, "check_true.png");
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Úkoly";
+			this.columnHeader1.Width = 444;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -607,11 +611,11 @@
 		private System.Windows.Forms.TableLayoutPanel checklistTlp;
 		private System.Windows.Forms.Button createCheckItemBtn;
 		private System.Windows.Forms.ListView checklistLv;
-		private System.Windows.Forms.ColumnHeader checkItemCompletedCh;
-		private System.Windows.Forms.ColumnHeader checkItemTextCh;
 		private System.Windows.Forms.Button editCheckItemBtn;
 		private System.Windows.Forms.Button deleteCheckItemBtn;
 		private System.Windows.Forms.Button completeCheckItemBtn;
+		private System.Windows.Forms.ImageList checkedImageList;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
 	}
 }
 

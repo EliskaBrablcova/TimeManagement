@@ -130,6 +130,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="check_false.png" />
+    <Content Include="check_true.png" />
     <Content Include="notysek_ikona.ico" />
     <Content Include="notysek_logo.png" />
   </ItemGroup>

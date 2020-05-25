@@ -1,4 +1,5 @@
-﻿using Eli.TimeManagement.Models.Entities;
+﻿using Eli.TimeManagement.App.Properties;
+using Eli.TimeManagement.Models.Entities;
 using Eli.TimeManagement.Models.Stats;
 using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
@@ -148,9 +149,10 @@ namespace Eli.TimeManagement.App
 
 		private void addRow(CheckItem checkItem)
 		{
-			var texts = new string[] { checkItem.Completed.ToString(), checkItem.Text.Replace("\r\n", " ") };
+			var texts = new string[] { checkItem.Text.Replace("\r\n", " ") };
 			var item = new ListViewItem(texts);
 			item.Group = checklistLv.Groups[checkItem.Type];
+			item.StateImageIndex = checkItem.Completed ? 1 : 0;
 			checklistLv.Items.Add(item);
 		}
 
