@@ -30,15 +30,15 @@ namespace Eli.TimeManagement.Models.ViewModels
 			if (days > 0)
 			{
 				// var result = days.ToString() + "D " + hours.ToString() + "H " + minutes.ToString() + "M "; 
-				sb.Append(days).Append("dní ");
+				sb.Append(days).Append(" dní ");
 				// sb.Append(days);
 				// sb.Append("D ");
 			}
 			if (hours > 0 || days > 0)
 			{
-				sb.Append(hours).Append("hod ");
+				sb.Append(hours).Append(" hod ");
 			}
-			sb.Append(minutes).Append("min");
+			sb.Append(minutes).Append(" min");
 			return sb.ToString();
 		}
 	}

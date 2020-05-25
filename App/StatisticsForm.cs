@@ -21,7 +21,7 @@ namespace Eli.TimeManagement.App
 
 		private void display(RecordStats stats)
 		{
-			minutesTotalValueLbl.Text = stats.MinutesTotal.ToString();
+			timeTotalValueLbl.Text = new TimeSpanVM(stats.MinutesTotal).ToString();
 			daysTotalValueLbl.Text = stats.DaysTotal.ToString();
 			activeDaysTotalValueLbl.Text = stats.ActiveDaysTotal.ToString();
 			activeDaysPercentValueLbl.Text = stats.ActiveDaysPercent.ToString("n2") + " %";
@@ -40,7 +40,7 @@ namespace Eli.TimeManagement.App
 
 		private void addRow(TypeStats typeStat)
 		{
-			var texts = new string[] { typeStat.Type, typeStat.Minutes.ToString(), typeStat.Percent.ToString("n2") };
+			var texts = new string[] { typeStat.Type, new TimeSpanVM(typeStat.Minutes).ToString(), typeStat.Percent.ToString("n2") };
 			var item = new ListViewItem(texts);
 		    statisticsTypesLv.Items.Add(item);
 		}
