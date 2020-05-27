@@ -260,7 +260,7 @@ namespace Eli.TimeManagement.App
 			if (result == DialogResult.OK)
 			{
 				_repo.Add(dialog.Item);
-				reloadAll();
+				reloadRecords();
 			}
 		}
 
@@ -277,7 +277,7 @@ namespace Eli.TimeManagement.App
 				if (result == DialogResult.OK)
 				{
 					_repo.Edit(dialog.Item);
-					reloadAll();
+					reloadRecords();
 				}
 			}
 		}
@@ -301,7 +301,7 @@ namespace Eli.TimeManagement.App
 					var selectedIndex = selected[0];
 					var id = _records[selectedIndex].ID;
 					_repo.Delete(id);
-					reloadAll();
+					reloadRecords();
 				}
 			}
 			setRecordButtonStates();
@@ -314,7 +314,7 @@ namespace Eli.TimeManagement.App
 			if (result == DialogResult.OK)
 			{
 				_noteRepo.Add(dialog.Item);
-				reloadAll();
+				reloadNotes();
 			}
 		}
 
@@ -331,7 +331,7 @@ namespace Eli.TimeManagement.App
 				if (result == DialogResult.OK)
 				{
 					_noteRepo.Edit(dialog.Item);
-					reloadAll();
+					reloadNotes();
 				}
 			}
 		}
@@ -357,7 +357,7 @@ namespace Eli.TimeManagement.App
 					var selectedIndex = selected[0];
 					var id = _notes[selectedIndex].ID;
 					_noteRepo.Delete(id);
-					reloadAll();
+					reloadNotes();
 				}
 			}
 			setNotesButtonStates();
@@ -395,14 +395,16 @@ namespace Eli.TimeManagement.App
 			{
 				filtrationBtn.Text = "Filtrování";
 			}
-			reloadAll();
+			reloadRecords();
+			reloadNotes();
 		}
 
 		private void dateFromDtp_ValueChanged(object sender, EventArgs e)
 		{
 			if (_activeFiltration)
 			{
-				reloadAll();
+				reloadRecords();
+				reloadNotes();
 			}
 		}
 
@@ -410,7 +412,8 @@ namespace Eli.TimeManagement.App
 		{
 			if (_activeFiltration)
 			{
-				reloadAll();
+				reloadRecords();
+				reloadNotes();
 			}
 		}
 
@@ -418,7 +421,7 @@ namespace Eli.TimeManagement.App
 		{
 			if (_activeFiltration && !_reloadStop)
 			{
-				reloadAll();
+				reloadRecords();
 			}
 		}
 
@@ -442,7 +445,7 @@ namespace Eli.TimeManagement.App
 			if (result == DialogResult.OK)
 			{
 				_checkItemRepo.Add(dialog.Item);
-				reloadAll();
+				reloadCheckItems();
 			}
 		}
 
@@ -459,7 +462,7 @@ namespace Eli.TimeManagement.App
 				if (result == DialogResult.OK)
 				{
 					_checkItemRepo.Edit(dialog.Item);
-					reloadAll();
+					reloadCheckItems();
 				}
 			}
 		}
@@ -481,7 +484,7 @@ namespace Eli.TimeManagement.App
 				if (!item.Completed)
 				{
 					_checkItemRepo.Complete(id);
-					reloadAll();
+					reloadCheckItems();
 				}
 			}
 			setCheckItemsButtonStates();
@@ -498,7 +501,7 @@ namespace Eli.TimeManagement.App
 					var selectedIndex = selected[0];
 					var id = _checkItems[selectedIndex].ID;
 					_checkItemRepo.Delete(id);
-					reloadAll();
+					reloadCheckItems();
 				}
 			}
 			setCheckItemsButtonStates();
