@@ -94,21 +94,21 @@ namespace Eli.TimeManagement.App
 		private DateTime? getDateFrom()
 		{
 			return _activeFiltration
-				? dateFromDtp.Value.Date
+				? dateFromRecordsFiltrationDtp.Value.Date
 				: (DateTime?)null;
 		}
 
 		private DateTime? getDateTo()
 		{
 			return _activeFiltration
-				? dateToDtp.Value.Date
+				? dateToRecordsFiltrationDtp.Value.Date
 				: (DateTime?)null;
 		}
 
 		private string getType()
 		{
 			var type = _activeFiltration
-				? typeCb.Text
+				? typeRecordsFiltrationCb.Text
 				: null;
 			if (type == "")
 			{
@@ -374,13 +374,13 @@ namespace Eli.TimeManagement.App
 		private void setFiltrationTypes(IList<string> types)
 		{
 			_reloadStop = true;
-			var originalValue = typeCb.Text;
-			typeCb.Items.Clear();
+			var originalValue = typeRecordsFiltrationCb.Text;
+			typeRecordsFiltrationCb.Items.Clear();
 			for (int i = 0; i < types.Count; i++)
 			{
-				typeCb.Items.Add(types[i]);
+				typeRecordsFiltrationCb.Items.Add(types[i]);
 			}
-			typeCb.Text = originalValue;
+			typeRecordsFiltrationCb.Text = originalValue;
 			_reloadStop = false;
 		}
 
@@ -389,11 +389,11 @@ namespace Eli.TimeManagement.App
 			_activeFiltration = !_activeFiltration;
 			if (_activeFiltration)
 			{
-				filtrationBtn.Text = "Zrušit filtrování";
+				recordsFiltrationBtn.Text = "Zrušit filtrování";
 			}
 			else
 			{
-				filtrationBtn.Text = "Filtrování";
+				recordsFiltrationBtn.Text = "Filtrování";
 			}
 			reloadRecords();
 			reloadNotes();
@@ -427,7 +427,7 @@ namespace Eli.TimeManagement.App
 
 		private void mainTc_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			typeCb.Enabled = mainTc.SelectedIndex == 0;
+			typeRecordsFiltrationCb.Enabled = mainTc.SelectedIndex == 0;
 		}
 
 		private void statisticsBtn_Click(object sender, EventArgs e)

@@ -56,20 +56,35 @@
 			this.checklistTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.createCheckItemBtn = new System.Windows.Forms.Button();
 			this.checklistLv = new System.Windows.Forms.ListView();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.checkedImageList = new System.Windows.Forms.ImageList(this.components);
 			this.editCheckItemBtn = new System.Windows.Forms.Button();
 			this.deleteCheckItemBtn = new System.Windows.Forms.Button();
 			this.completeCheckItemBtn = new System.Windows.Forms.Button();
-			this.dateToDtp = new System.Windows.Forms.DateTimePicker();
-			this.dateFromDtp = new System.Windows.Forms.DateTimePicker();
-			this.filtrationBtn = new System.Windows.Forms.Button();
-			this.typeCb = new System.Windows.Forms.ComboBox();
-			this.filtrationGB = new System.Windows.Forms.GroupBox();
-			this.filtrationTlp = new System.Windows.Forms.TableLayoutPanel();
-			this.dateFromLbl = new System.Windows.Forms.Label();
-			this.typeLbl = new System.Windows.Forms.Label();
-			this.dateToLbl = new System.Windows.Forms.Label();
-			this.checkedImageList = new System.Windows.Forms.ImageList(this.components);
-			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.filtrationTC = new System.Windows.Forms.TabControl();
+			this.recordsFiltrationTP = new System.Windows.Forms.TabPage();
+			this.notesFiltrationTP = new System.Windows.Forms.TabPage();
+			this.checkItemsFiltrationTP = new System.Windows.Forms.TabPage();
+			this.recordsFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.dateFromRecordsFiltrationLbl = new System.Windows.Forms.Label();
+			this.dateToRecordsFiltrationDtp = new System.Windows.Forms.DateTimePicker();
+			this.typeRecordsFiltrationLbl = new System.Windows.Forms.Label();
+			this.recordsFiltrationBtn = new System.Windows.Forms.Button();
+			this.dateToRecordsFiltrationLbl = new System.Windows.Forms.Label();
+			this.dateFromRecordsFiltrationDtp = new System.Windows.Forms.DateTimePicker();
+			this.typeRecordsFiltrationCb = new System.Windows.Forms.ComboBox();
+			this.notesFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.dateFromNotesFiltrationLbl = new System.Windows.Forms.Label();
+			this.dateToNotesFiltrationDtp = new System.Windows.Forms.DateTimePicker();
+			this.notesFiltrationBtn = new System.Windows.Forms.Button();
+			this.dateToNotesFiltrationLbl = new System.Windows.Forms.Label();
+			this.dateFromNotesFiltrationDtp = new System.Windows.Forms.DateTimePicker();
+			this.checkItemsFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
+			this.checkItemsFiltrationBtn = new System.Windows.Forms.Button();
+			this.typeCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
+			this.typeCheckItemsFiltrationCb = new System.Windows.Forms.ComboBox();
+			this.completedCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
+			this.completedCheckItemsFiltrationCB = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -78,8 +93,13 @@
 			this.notesTlp.SuspendLayout();
 			this.checklistTP.SuspendLayout();
 			this.checklistTlp.SuspendLayout();
-			this.filtrationGB.SuspendLayout();
-			this.filtrationTlp.SuspendLayout();
+			this.filtrationTC.SuspendLayout();
+			this.recordsFiltrationTP.SuspendLayout();
+			this.notesFiltrationTP.SuspendLayout();
+			this.checkItemsFiltrationTP.SuspendLayout();
+			this.recordsFiltrationTlp.SuspendLayout();
+			this.notesFiltrationTlp.SuspendLayout();
+			this.checkItemsFiltrationTlp.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// recordsLv
@@ -397,6 +417,18 @@
 			this.checklistLv.SelectedIndexChanged += new System.EventHandler(this.checklistLv_SelectedIndexChanged);
 			this.checklistLv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checklistLv_KeyDown);
 			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Úkoly";
+			this.columnHeader1.Width = 444;
+			// 
+			// checkedImageList
+			// 
+			this.checkedImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("checkedImageList.ImageStream")));
+			this.checkedImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.checkedImageList.Images.SetKeyName(0, "check_false.png");
+			this.checkedImageList.Images.SetKeyName(1, "check_true.png");
+			// 
 			// editCheckItemBtn
 			// 
 			this.editCheckItemBtn.Enabled = false;
@@ -430,130 +462,292 @@
 			this.completeCheckItemBtn.UseVisualStyleBackColor = true;
 			this.completeCheckItemBtn.Click += new System.EventHandler(this.completeCheckItemBtn_Click);
 			// 
-			// dateToDtp
+			// filtrationTC
 			// 
-			this.dateToDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
-			this.dateToDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateToDtp.Location = new System.Drawing.Point(83, 29);
-			this.dateToDtp.Name = "dateToDtp";
-			this.dateToDtp.Size = new System.Drawing.Size(200, 20);
-			this.dateToDtp.TabIndex = 8;
-			this.dateToDtp.ValueChanged += new System.EventHandler(this.dateToDtp_ValueChanged);
+			this.filtrationTC.Controls.Add(this.recordsFiltrationTP);
+			this.filtrationTC.Controls.Add(this.notesFiltrationTP);
+			this.filtrationTC.Controls.Add(this.checkItemsFiltrationTP);
+			this.filtrationTC.Location = new System.Drawing.Point(218, 12);
+			this.filtrationTC.Name = "filtrationTC";
+			this.filtrationTC.SelectedIndex = 0;
+			this.filtrationTC.Size = new System.Drawing.Size(473, 132);
+			this.filtrationTC.TabIndex = 13;
 			// 
-			// dateFromDtp
+			// recordsFiltrationTP
 			// 
-			this.dateFromDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
-			this.dateFromDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateFromDtp.Location = new System.Drawing.Point(83, 3);
-			this.dateFromDtp.Name = "dateFromDtp";
-			this.dateFromDtp.Size = new System.Drawing.Size(200, 20);
-			this.dateFromDtp.TabIndex = 9;
-			this.dateFromDtp.ValueChanged += new System.EventHandler(this.dateFromDtp_ValueChanged);
+			this.recordsFiltrationTP.Controls.Add(this.recordsFiltrationTlp);
+			this.recordsFiltrationTP.Location = new System.Drawing.Point(4, 22);
+			this.recordsFiltrationTP.Name = "recordsFiltrationTP";
+			this.recordsFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
+			this.recordsFiltrationTP.Size = new System.Drawing.Size(465, 106);
+			this.recordsFiltrationTP.TabIndex = 0;
+			this.recordsFiltrationTP.Text = "Filtrování";
+			this.recordsFiltrationTP.UseVisualStyleBackColor = true;
 			// 
-			// filtrationBtn
+			// notesFiltrationTP
 			// 
-			this.filtrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.filtrationBtn.Location = new System.Drawing.Point(364, 55);
-			this.filtrationBtn.Name = "filtrationBtn";
-			this.filtrationBtn.Size = new System.Drawing.Size(96, 21);
-			this.filtrationBtn.TabIndex = 10;
-			this.filtrationBtn.Text = "Filtrování";
-			this.filtrationBtn.UseVisualStyleBackColor = true;
-			this.filtrationBtn.Click += new System.EventHandler(this.filtrationBtn_Click);
+			this.notesFiltrationTP.Controls.Add(this.notesFiltrationTlp);
+			this.notesFiltrationTP.Location = new System.Drawing.Point(4, 22);
+			this.notesFiltrationTP.Name = "notesFiltrationTP";
+			this.notesFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
+			this.notesFiltrationTP.Size = new System.Drawing.Size(465, 106);
+			this.notesFiltrationTP.TabIndex = 1;
+			this.notesFiltrationTP.Text = "Filtrování";
+			this.notesFiltrationTP.UseVisualStyleBackColor = true;
 			// 
-			// typeCb
+			// checkItemsFiltrationTP
 			// 
-			this.typeCb.FormattingEnabled = true;
-			this.typeCb.Location = new System.Drawing.Point(83, 55);
-			this.typeCb.Name = "typeCb";
-			this.typeCb.Size = new System.Drawing.Size(200, 21);
-			this.typeCb.TabIndex = 11;
-			this.typeCb.TextChanged += new System.EventHandler(this.typeCb_TextChanged);
+			this.checkItemsFiltrationTP.Controls.Add(this.checkItemsFiltrationTlp);
+			this.checkItemsFiltrationTP.Location = new System.Drawing.Point(4, 22);
+			this.checkItemsFiltrationTP.Name = "checkItemsFiltrationTP";
+			this.checkItemsFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
+			this.checkItemsFiltrationTP.Size = new System.Drawing.Size(465, 106);
+			this.checkItemsFiltrationTP.TabIndex = 2;
+			this.checkItemsFiltrationTP.Text = "Filtrování";
+			this.checkItemsFiltrationTP.UseVisualStyleBackColor = true;
 			// 
-			// filtrationGB
+			// recordsFiltrationTlp
 			// 
-			this.filtrationGB.Controls.Add(this.filtrationTlp);
-			this.filtrationGB.Location = new System.Drawing.Point(218, 26);
-			this.filtrationGB.Name = "filtrationGB";
-			this.filtrationGB.Size = new System.Drawing.Size(469, 98);
-			this.filtrationGB.TabIndex = 12;
-			this.filtrationGB.TabStop = false;
-			this.filtrationGB.Text = "Filtrování";
+			this.recordsFiltrationTlp.ColumnCount = 3;
+			this.recordsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.recordsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.recordsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+			this.recordsFiltrationTlp.Controls.Add(this.dateFromRecordsFiltrationLbl, 0, 0);
+			this.recordsFiltrationTlp.Controls.Add(this.dateToRecordsFiltrationDtp, 1, 1);
+			this.recordsFiltrationTlp.Controls.Add(this.typeRecordsFiltrationLbl, 0, 2);
+			this.recordsFiltrationTlp.Controls.Add(this.recordsFiltrationBtn, 2, 2);
+			this.recordsFiltrationTlp.Controls.Add(this.dateToRecordsFiltrationLbl, 0, 1);
+			this.recordsFiltrationTlp.Controls.Add(this.dateFromRecordsFiltrationDtp, 1, 0);
+			this.recordsFiltrationTlp.Controls.Add(this.typeRecordsFiltrationCb, 1, 2);
+			this.recordsFiltrationTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.recordsFiltrationTlp.Location = new System.Drawing.Point(3, 3);
+			this.recordsFiltrationTlp.Name = "recordsFiltrationTlp";
+			this.recordsFiltrationTlp.RowCount = 3;
+			this.recordsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.recordsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.recordsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.recordsFiltrationTlp.Size = new System.Drawing.Size(459, 100);
+			this.recordsFiltrationTlp.TabIndex = 16;
 			// 
-			// filtrationTlp
+			// dateFromRecordsFiltrationLbl
 			// 
-			this.filtrationTlp.ColumnCount = 3;
-			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.filtrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
-			this.filtrationTlp.Controls.Add(this.dateFromLbl, 0, 0);
-			this.filtrationTlp.Controls.Add(this.dateToDtp, 1, 1);
-			this.filtrationTlp.Controls.Add(this.typeLbl, 0, 2);
-			this.filtrationTlp.Controls.Add(this.filtrationBtn, 2, 2);
-			this.filtrationTlp.Controls.Add(this.dateToLbl, 0, 1);
-			this.filtrationTlp.Controls.Add(this.dateFromDtp, 1, 0);
-			this.filtrationTlp.Controls.Add(this.typeCb, 1, 2);
-			this.filtrationTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.filtrationTlp.Location = new System.Drawing.Point(3, 16);
-			this.filtrationTlp.Name = "filtrationTlp";
-			this.filtrationTlp.RowCount = 3;
-			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.filtrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.filtrationTlp.Size = new System.Drawing.Size(463, 79);
-			this.filtrationTlp.TabIndex = 15;
+			this.dateFromRecordsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromRecordsFiltrationLbl.Location = new System.Drawing.Point(3, 0);
+			this.dateFromRecordsFiltrationLbl.Name = "dateFromRecordsFiltrationLbl";
+			this.dateFromRecordsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.dateFromRecordsFiltrationLbl.TabIndex = 12;
+			this.dateFromRecordsFiltrationLbl.Text = "Datum od";
+			this.dateFromRecordsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// dateFromLbl
+			// dateToRecordsFiltrationDtp
 			// 
-			this.dateFromLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateFromLbl.Location = new System.Drawing.Point(3, 0);
-			this.dateFromLbl.Name = "dateFromLbl";
-			this.dateFromLbl.Size = new System.Drawing.Size(74, 26);
-			this.dateFromLbl.TabIndex = 12;
-			this.dateFromLbl.Text = "Datum od";
-			this.dateFromLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.dateToRecordsFiltrationDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateToRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToRecordsFiltrationDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateToRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 36);
+			this.dateToRecordsFiltrationDtp.Name = "dateToRecordsFiltrationDtp";
+			this.dateToRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateToRecordsFiltrationDtp.TabIndex = 8;
 			// 
-			// typeLbl
+			// typeRecordsFiltrationLbl
 			// 
-			this.typeLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.typeLbl.Location = new System.Drawing.Point(3, 52);
-			this.typeLbl.Name = "typeLbl";
-			this.typeLbl.Size = new System.Drawing.Size(74, 27);
-			this.typeLbl.TabIndex = 14;
-			this.typeLbl.Text = "Typ aktivity";
-			this.typeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.typeRecordsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeRecordsFiltrationLbl.Location = new System.Drawing.Point(3, 66);
+			this.typeRecordsFiltrationLbl.Name = "typeRecordsFiltrationLbl";
+			this.typeRecordsFiltrationLbl.Size = new System.Drawing.Size(74, 34);
+			this.typeRecordsFiltrationLbl.TabIndex = 14;
+			this.typeRecordsFiltrationLbl.Text = "Typ aktivity";
+			this.typeRecordsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// dateToLbl
+			// recordsFiltrationBtn
 			// 
-			this.dateToLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateToLbl.Location = new System.Drawing.Point(3, 26);
-			this.dateToLbl.Name = "dateToLbl";
-			this.dateToLbl.Size = new System.Drawing.Size(74, 26);
-			this.dateToLbl.TabIndex = 13;
-			this.dateToLbl.Text = "Datum do";
-			this.dateToLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.recordsFiltrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.recordsFiltrationBtn.Location = new System.Drawing.Point(360, 76);
+			this.recordsFiltrationBtn.Name = "recordsFiltrationBtn";
+			this.recordsFiltrationBtn.Size = new System.Drawing.Size(96, 21);
+			this.recordsFiltrationBtn.TabIndex = 10;
+			this.recordsFiltrationBtn.Text = "Filtrování";
+			this.recordsFiltrationBtn.UseVisualStyleBackColor = true;
 			// 
-			// checkedImageList
+			// dateToRecordsFiltrationLbl
 			// 
-			this.checkedImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("checkedImageList.ImageStream")));
-			this.checkedImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.checkedImageList.Images.SetKeyName(0, "check_false.png");
-			this.checkedImageList.Images.SetKeyName(1, "check_true.png");
+			this.dateToRecordsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToRecordsFiltrationLbl.Location = new System.Drawing.Point(3, 33);
+			this.dateToRecordsFiltrationLbl.Name = "dateToRecordsFiltrationLbl";
+			this.dateToRecordsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.dateToRecordsFiltrationLbl.TabIndex = 13;
+			this.dateToRecordsFiltrationLbl.Text = "Datum do";
+			this.dateToRecordsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// columnHeader1
+			// dateFromRecordsFiltrationDtp
 			// 
-			this.columnHeader1.Text = "Úkoly";
-			this.columnHeader1.Width = 444;
+			this.dateFromRecordsFiltrationDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateFromRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromRecordsFiltrationDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateFromRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 3);
+			this.dateFromRecordsFiltrationDtp.Name = "dateFromRecordsFiltrationDtp";
+			this.dateFromRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateFromRecordsFiltrationDtp.TabIndex = 9;
+			// 
+			// typeRecordsFiltrationCb
+			// 
+			this.typeRecordsFiltrationCb.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeRecordsFiltrationCb.FormattingEnabled = true;
+			this.typeRecordsFiltrationCb.Location = new System.Drawing.Point(83, 69);
+			this.typeRecordsFiltrationCb.Name = "typeRecordsFiltrationCb";
+			this.typeRecordsFiltrationCb.Size = new System.Drawing.Size(228, 21);
+			this.typeRecordsFiltrationCb.TabIndex = 11;
+			// 
+			// notesFiltrationTlp
+			// 
+			this.notesFiltrationTlp.ColumnCount = 3;
+			this.notesFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.notesFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.notesFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+			this.notesFiltrationTlp.Controls.Add(this.dateFromNotesFiltrationLbl, 0, 0);
+			this.notesFiltrationTlp.Controls.Add(this.dateToNotesFiltrationDtp, 1, 1);
+			this.notesFiltrationTlp.Controls.Add(this.notesFiltrationBtn, 2, 2);
+			this.notesFiltrationTlp.Controls.Add(this.dateToNotesFiltrationLbl, 0, 1);
+			this.notesFiltrationTlp.Controls.Add(this.dateFromNotesFiltrationDtp, 1, 0);
+			this.notesFiltrationTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.notesFiltrationTlp.Location = new System.Drawing.Point(3, 3);
+			this.notesFiltrationTlp.Name = "notesFiltrationTlp";
+			this.notesFiltrationTlp.RowCount = 3;
+			this.notesFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.notesFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.notesFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.notesFiltrationTlp.Size = new System.Drawing.Size(459, 100);
+			this.notesFiltrationTlp.TabIndex = 17;
+			// 
+			// dateFromNotesFiltrationLbl
+			// 
+			this.dateFromNotesFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromNotesFiltrationLbl.Location = new System.Drawing.Point(3, 0);
+			this.dateFromNotesFiltrationLbl.Name = "dateFromNotesFiltrationLbl";
+			this.dateFromNotesFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.dateFromNotesFiltrationLbl.TabIndex = 12;
+			this.dateFromNotesFiltrationLbl.Text = "Datum od";
+			this.dateFromNotesFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// dateToNotesFiltrationDtp
+			// 
+			this.dateToNotesFiltrationDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateToNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToNotesFiltrationDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateToNotesFiltrationDtp.Location = new System.Drawing.Point(83, 36);
+			this.dateToNotesFiltrationDtp.Name = "dateToNotesFiltrationDtp";
+			this.dateToNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateToNotesFiltrationDtp.TabIndex = 8;
+			// 
+			// notesFiltrationBtn
+			// 
+			this.notesFiltrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.notesFiltrationBtn.Location = new System.Drawing.Point(360, 76);
+			this.notesFiltrationBtn.Name = "notesFiltrationBtn";
+			this.notesFiltrationBtn.Size = new System.Drawing.Size(96, 21);
+			this.notesFiltrationBtn.TabIndex = 10;
+			this.notesFiltrationBtn.Text = "Filtrování";
+			this.notesFiltrationBtn.UseVisualStyleBackColor = true;
+			// 
+			// dateToNotesFiltrationLbl
+			// 
+			this.dateToNotesFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToNotesFiltrationLbl.Location = new System.Drawing.Point(3, 33);
+			this.dateToNotesFiltrationLbl.Name = "dateToNotesFiltrationLbl";
+			this.dateToNotesFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.dateToNotesFiltrationLbl.TabIndex = 13;
+			this.dateToNotesFiltrationLbl.Text = "Datum do";
+			this.dateToNotesFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// dateFromNotesFiltrationDtp
+			// 
+			this.dateFromNotesFiltrationDtp.CustomFormat = "dd.MM.yyyy HH:mm:ss";
+			this.dateFromNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromNotesFiltrationDtp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateFromNotesFiltrationDtp.Location = new System.Drawing.Point(83, 3);
+			this.dateFromNotesFiltrationDtp.Name = "dateFromNotesFiltrationDtp";
+			this.dateFromNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateFromNotesFiltrationDtp.TabIndex = 9;
+			// 
+			// checkItemsFiltrationTlp
+			// 
+			this.checkItemsFiltrationTlp.ColumnCount = 3;
+			this.checkItemsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.checkItemsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.checkItemsFiltrationTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+			this.checkItemsFiltrationTlp.Controls.Add(this.completedCheckItemsFiltrationCB, 1, 1);
+			this.checkItemsFiltrationTlp.Controls.Add(this.completedCheckItemsFiltrationLbl, 0, 1);
+			this.checkItemsFiltrationTlp.Controls.Add(this.typeCheckItemsFiltrationLbl, 0, 0);
+			this.checkItemsFiltrationTlp.Controls.Add(this.typeCheckItemsFiltrationCb, 1, 0);
+			this.checkItemsFiltrationTlp.Controls.Add(this.checkItemsFiltrationBtn, 2, 2);
+			this.checkItemsFiltrationTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checkItemsFiltrationTlp.Location = new System.Drawing.Point(3, 3);
+			this.checkItemsFiltrationTlp.Name = "checkItemsFiltrationTlp";
+			this.checkItemsFiltrationTlp.RowCount = 3;
+			this.checkItemsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.checkItemsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.checkItemsFiltrationTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+			this.checkItemsFiltrationTlp.Size = new System.Drawing.Size(459, 100);
+			this.checkItemsFiltrationTlp.TabIndex = 18;
+			// 
+			// checkItemsFiltrationBtn
+			// 
+			this.checkItemsFiltrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkItemsFiltrationBtn.Location = new System.Drawing.Point(360, 76);
+			this.checkItemsFiltrationBtn.Name = "checkItemsFiltrationBtn";
+			this.checkItemsFiltrationBtn.Size = new System.Drawing.Size(96, 21);
+			this.checkItemsFiltrationBtn.TabIndex = 10;
+			this.checkItemsFiltrationBtn.Text = "Filtrování";
+			this.checkItemsFiltrationBtn.UseVisualStyleBackColor = true;
+			// 
+			// typeCheckItemsFiltrationLbl
+			// 
+			this.typeCheckItemsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeCheckItemsFiltrationLbl.Location = new System.Drawing.Point(3, 0);
+			this.typeCheckItemsFiltrationLbl.Name = "typeCheckItemsFiltrationLbl";
+			this.typeCheckItemsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.typeCheckItemsFiltrationLbl.TabIndex = 13;
+			this.typeCheckItemsFiltrationLbl.Text = "Typ úkolů";
+			this.typeCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// typeCheckItemsFiltrationCb
+			// 
+			this.typeCheckItemsFiltrationCb.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.typeCheckItemsFiltrationCb.FormattingEnabled = true;
+			this.typeCheckItemsFiltrationCb.Location = new System.Drawing.Point(83, 3);
+			this.typeCheckItemsFiltrationCb.Name = "typeCheckItemsFiltrationCb";
+			this.typeCheckItemsFiltrationCb.Size = new System.Drawing.Size(228, 21);
+			this.typeCheckItemsFiltrationCb.TabIndex = 14;
+			// 
+			// completedCheckItemsFiltrationLbl
+			// 
+			this.completedCheckItemsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.completedCheckItemsFiltrationLbl.Location = new System.Drawing.Point(3, 33);
+			this.completedCheckItemsFiltrationLbl.Name = "completedCheckItemsFiltrationLbl";
+			this.completedCheckItemsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.completedCheckItemsFiltrationLbl.TabIndex = 15;
+			this.completedCheckItemsFiltrationLbl.Text = "Dokončenost";
+			this.completedCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// completedCheckItemsFiltrationCB
+			// 
+			this.completedCheckItemsFiltrationCB.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.completedCheckItemsFiltrationCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.completedCheckItemsFiltrationCB.FormattingEnabled = true;
+			this.completedCheckItemsFiltrationCB.Location = new System.Drawing.Point(83, 36);
+			this.completedCheckItemsFiltrationCB.Name = "completedCheckItemsFiltrationCB";
+			this.completedCheckItemsFiltrationCB.Size = new System.Drawing.Size(228, 21);
+			this.completedCheckItemsFiltrationCB.TabIndex = 16;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(703, 480);
+			this.Controls.Add(this.filtrationTC);
 			this.Controls.Add(this.logoPb);
 			this.Controls.Add(this.mainTc);
 			this.Controls.Add(this.versionLbl);
-			this.Controls.Add(this.filtrationGB);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(719, 314);
 			this.Name = "MainForm";
@@ -567,8 +761,13 @@
 			this.notesTlp.ResumeLayout(false);
 			this.checklistTP.ResumeLayout(false);
 			this.checklistTlp.ResumeLayout(false);
-			this.filtrationGB.ResumeLayout(false);
-			this.filtrationTlp.ResumeLayout(false);
+			this.filtrationTC.ResumeLayout(false);
+			this.recordsFiltrationTP.ResumeLayout(false);
+			this.notesFiltrationTP.ResumeLayout(false);
+			this.checkItemsFiltrationTP.ResumeLayout(false);
+			this.recordsFiltrationTlp.ResumeLayout(false);
+			this.notesFiltrationTlp.ResumeLayout(false);
+			this.checkItemsFiltrationTlp.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -597,15 +796,6 @@
 		private System.Windows.Forms.ColumnHeader noteTextCh;
 		private System.Windows.Forms.Button editNoteBtn;
 		private System.Windows.Forms.Button deleteNoteBtn;
-		private System.Windows.Forms.DateTimePicker dateToDtp;
-		private System.Windows.Forms.DateTimePicker dateFromDtp;
-		private System.Windows.Forms.Button filtrationBtn;
-		private System.Windows.Forms.ComboBox typeCb;
-		private System.Windows.Forms.GroupBox filtrationGB;
-		private System.Windows.Forms.TableLayoutPanel filtrationTlp;
-		private System.Windows.Forms.Label dateFromLbl;
-		private System.Windows.Forms.Label typeLbl;
-		private System.Windows.Forms.Label dateToLbl;
 		private System.Windows.Forms.Button statisticsBtn;
 		private System.Windows.Forms.TabPage checklistTP;
 		private System.Windows.Forms.TableLayoutPanel checklistTlp;
@@ -616,6 +806,30 @@
 		private System.Windows.Forms.Button completeCheckItemBtn;
 		private System.Windows.Forms.ImageList checkedImageList;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.TabControl filtrationTC;
+		private System.Windows.Forms.TabPage recordsFiltrationTP;
+		private System.Windows.Forms.TableLayoutPanel recordsFiltrationTlp;
+		private System.Windows.Forms.Label dateFromRecordsFiltrationLbl;
+		private System.Windows.Forms.DateTimePicker dateToRecordsFiltrationDtp;
+		private System.Windows.Forms.Label typeRecordsFiltrationLbl;
+		private System.Windows.Forms.Button recordsFiltrationBtn;
+		private System.Windows.Forms.Label dateToRecordsFiltrationLbl;
+		private System.Windows.Forms.DateTimePicker dateFromRecordsFiltrationDtp;
+		private System.Windows.Forms.ComboBox typeRecordsFiltrationCb;
+		private System.Windows.Forms.TabPage notesFiltrationTP;
+		private System.Windows.Forms.TableLayoutPanel notesFiltrationTlp;
+		private System.Windows.Forms.Label dateFromNotesFiltrationLbl;
+		private System.Windows.Forms.DateTimePicker dateToNotesFiltrationDtp;
+		private System.Windows.Forms.Button notesFiltrationBtn;
+		private System.Windows.Forms.Label dateToNotesFiltrationLbl;
+		private System.Windows.Forms.DateTimePicker dateFromNotesFiltrationDtp;
+		private System.Windows.Forms.TabPage checkItemsFiltrationTP;
+		private System.Windows.Forms.TableLayoutPanel checkItemsFiltrationTlp;
+		private System.Windows.Forms.Button checkItemsFiltrationBtn;
+		private System.Windows.Forms.Label completedCheckItemsFiltrationLbl;
+		private System.Windows.Forms.Label typeCheckItemsFiltrationLbl;
+		private System.Windows.Forms.ComboBox typeCheckItemsFiltrationCb;
+		private System.Windows.Forms.ComboBox completedCheckItemsFiltrationCB;
 	}
 }
 
