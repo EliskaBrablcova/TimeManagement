@@ -39,6 +39,7 @@ namespace Eli.TimeManagement.App
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			reloadAll();
+			showRecordsFiltrationTab();
 		}
 		private void reloadAll()
 		{
@@ -400,12 +401,44 @@ namespace Eli.TimeManagement.App
 			_reloadRecordsStop = false;
 		}
 
-		//TODO - implementovat logiku filtrování zvlášť pro kažný tab
 		private void mainTc_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
+			if (mainTc.SelectedTab == notesTP)
+			{
+				showNotesFiltrationTab();
+			}
+			else if (mainTc.SelectedTab == checklistTP)
+			{
+				showCheckItemsFiltrationTab();
+			}
+			else
+			{
+				showRecordsFiltrationTab();
+			}
 		}
 
+		private void hideAllFiltrationTabs()
+		{
+			filtrationTC.TabPages.Clear();
+		}
+
+		private void showRecordsFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(recordsFiltrationTP);
+		}
+
+		private void showNotesFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(notesFiltrationTP);
+		}
+
+		private void showCheckItemsFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(checkItemsFiltrationTP);
+		}
 		private void statisticsBtn_Click(object sender, EventArgs e)
 		{
 			var statsCounter = new StatisticsCounter();
