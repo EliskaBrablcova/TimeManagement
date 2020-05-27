@@ -199,6 +199,14 @@ namespace Eli.TimeManagement.App
 			if (selected.Count == 1)
 			{
 				setCheckItemsButtonStates(true);
+				if (_checkItems[selected[0]].Completed)
+				{
+					completeCheckItemBtn.Enabled = false;
+				}
+				else
+				{
+					completeCheckItemBtn.Enabled = true;
+				}
 			}
 			else
 			{
@@ -223,6 +231,10 @@ namespace Eli.TimeManagement.App
 		{
 			deleteCheckItemBtn.Enabled = enabled;
 			editCheckItemBtn.Enabled = enabled;
+			if (!enabled)
+			{
+				completeCheckItemBtn.Enabled = enabled;
+			}
 		}
 
 		private void createRecordBtn_Click(object sender, EventArgs e)
@@ -444,7 +456,20 @@ namespace Eli.TimeManagement.App
 
 		private void completeCheckItemBtn_Click(object sender, EventArgs e)
 		{
-
+			setCheckItemsButtonStates(false);
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var selectedIndex = selected[0];
+				var item = _checkItems[selectedIndex];
+				var id = item.ID;
+				if (!item.Completed)
+				{
+					_checkItemRepo.Complete(id);
+					reload();
+				}
+			}
+			setCheckItemsButtonStates();
 		}
 		private void deleteCheckItem()
 		{
