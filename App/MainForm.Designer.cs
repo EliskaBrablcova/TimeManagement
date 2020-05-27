@@ -63,8 +63,6 @@
 			this.completeCheckItemBtn = new System.Windows.Forms.Button();
 			this.filtrationTC = new System.Windows.Forms.TabControl();
 			this.recordsFiltrationTP = new System.Windows.Forms.TabPage();
-			this.notesFiltrationTP = new System.Windows.Forms.TabPage();
-			this.checkItemsFiltrationTP = new System.Windows.Forms.TabPage();
 			this.recordsFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.dateFromRecordsFiltrationLbl = new System.Windows.Forms.Label();
 			this.dateToRecordsFiltrationDtp = new System.Windows.Forms.DateTimePicker();
@@ -73,18 +71,20 @@
 			this.dateToRecordsFiltrationLbl = new System.Windows.Forms.Label();
 			this.dateFromRecordsFiltrationDtp = new System.Windows.Forms.DateTimePicker();
 			this.typeRecordsFiltrationCb = new System.Windows.Forms.ComboBox();
+			this.notesFiltrationTP = new System.Windows.Forms.TabPage();
 			this.notesFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.dateFromNotesFiltrationLbl = new System.Windows.Forms.Label();
 			this.dateToNotesFiltrationDtp = new System.Windows.Forms.DateTimePicker();
 			this.notesFiltrationBtn = new System.Windows.Forms.Button();
 			this.dateToNotesFiltrationLbl = new System.Windows.Forms.Label();
 			this.dateFromNotesFiltrationDtp = new System.Windows.Forms.DateTimePicker();
+			this.checkItemsFiltrationTP = new System.Windows.Forms.TabPage();
 			this.checkItemsFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
-			this.checkItemsFiltrationBtn = new System.Windows.Forms.Button();
+			this.completedCheckItemsFiltrationCB = new System.Windows.Forms.ComboBox();
+			this.completedCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
 			this.typeCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
 			this.typeCheckItemsFiltrationCb = new System.Windows.Forms.ComboBox();
-			this.completedCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
-			this.completedCheckItemsFiltrationCB = new System.Windows.Forms.ComboBox();
+			this.checkItemsFiltrationBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -95,10 +95,10 @@
 			this.checklistTlp.SuspendLayout();
 			this.filtrationTC.SuspendLayout();
 			this.recordsFiltrationTP.SuspendLayout();
-			this.notesFiltrationTP.SuspendLayout();
-			this.checkItemsFiltrationTP.SuspendLayout();
 			this.recordsFiltrationTlp.SuspendLayout();
+			this.notesFiltrationTP.SuspendLayout();
 			this.notesFiltrationTlp.SuspendLayout();
+			this.checkItemsFiltrationTP.SuspendLayout();
 			this.checkItemsFiltrationTlp.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -484,28 +484,6 @@
 			this.recordsFiltrationTP.Text = "Filtrování";
 			this.recordsFiltrationTP.UseVisualStyleBackColor = true;
 			// 
-			// notesFiltrationTP
-			// 
-			this.notesFiltrationTP.Controls.Add(this.notesFiltrationTlp);
-			this.notesFiltrationTP.Location = new System.Drawing.Point(4, 22);
-			this.notesFiltrationTP.Name = "notesFiltrationTP";
-			this.notesFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
-			this.notesFiltrationTP.Size = new System.Drawing.Size(465, 106);
-			this.notesFiltrationTP.TabIndex = 1;
-			this.notesFiltrationTP.Text = "Filtrování";
-			this.notesFiltrationTP.UseVisualStyleBackColor = true;
-			// 
-			// checkItemsFiltrationTP
-			// 
-			this.checkItemsFiltrationTP.Controls.Add(this.checkItemsFiltrationTlp);
-			this.checkItemsFiltrationTP.Location = new System.Drawing.Point(4, 22);
-			this.checkItemsFiltrationTP.Name = "checkItemsFiltrationTP";
-			this.checkItemsFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
-			this.checkItemsFiltrationTP.Size = new System.Drawing.Size(465, 106);
-			this.checkItemsFiltrationTP.TabIndex = 2;
-			this.checkItemsFiltrationTP.Text = "Filtrování";
-			this.checkItemsFiltrationTP.UseVisualStyleBackColor = true;
-			// 
 			// recordsFiltrationTlp
 			// 
 			this.recordsFiltrationTlp.ColumnCount = 3;
@@ -548,6 +526,7 @@
 			this.dateToRecordsFiltrationDtp.Name = "dateToRecordsFiltrationDtp";
 			this.dateToRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
 			this.dateToRecordsFiltrationDtp.TabIndex = 8;
+			this.dateToRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToRecordsFiltrationDtp_ValueChanged);
 			// 
 			// typeRecordsFiltrationLbl
 			// 
@@ -568,6 +547,7 @@
 			this.recordsFiltrationBtn.TabIndex = 10;
 			this.recordsFiltrationBtn.Text = "Filtrování";
 			this.recordsFiltrationBtn.UseVisualStyleBackColor = true;
+			this.recordsFiltrationBtn.Click += new System.EventHandler(this.recordsFiltrationBtn_Click);
 			// 
 			// dateToRecordsFiltrationLbl
 			// 
@@ -588,6 +568,7 @@
 			this.dateFromRecordsFiltrationDtp.Name = "dateFromRecordsFiltrationDtp";
 			this.dateFromRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
 			this.dateFromRecordsFiltrationDtp.TabIndex = 9;
+			this.dateFromRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromRecordsFiltrationDtp_ValueChanged);
 			// 
 			// typeRecordsFiltrationCb
 			// 
@@ -597,6 +578,18 @@
 			this.typeRecordsFiltrationCb.Name = "typeRecordsFiltrationCb";
 			this.typeRecordsFiltrationCb.Size = new System.Drawing.Size(228, 21);
 			this.typeRecordsFiltrationCb.TabIndex = 11;
+			this.typeRecordsFiltrationCb.TextChanged += new System.EventHandler(this.typeRecordsFiltrationCb_TextChanged);
+			// 
+			// notesFiltrationTP
+			// 
+			this.notesFiltrationTP.Controls.Add(this.notesFiltrationTlp);
+			this.notesFiltrationTP.Location = new System.Drawing.Point(4, 22);
+			this.notesFiltrationTP.Name = "notesFiltrationTP";
+			this.notesFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
+			this.notesFiltrationTP.Size = new System.Drawing.Size(465, 106);
+			this.notesFiltrationTP.TabIndex = 1;
+			this.notesFiltrationTP.Text = "Filtrování";
+			this.notesFiltrationTP.UseVisualStyleBackColor = true;
 			// 
 			// notesFiltrationTlp
 			// 
@@ -638,6 +631,7 @@
 			this.dateToNotesFiltrationDtp.Name = "dateToNotesFiltrationDtp";
 			this.dateToNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
 			this.dateToNotesFiltrationDtp.TabIndex = 8;
+			this.dateToNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToNotesFiltrationDtp_ValueChanged);
 			// 
 			// notesFiltrationBtn
 			// 
@@ -648,6 +642,7 @@
 			this.notesFiltrationBtn.TabIndex = 10;
 			this.notesFiltrationBtn.Text = "Filtrování";
 			this.notesFiltrationBtn.UseVisualStyleBackColor = true;
+			this.notesFiltrationBtn.Click += new System.EventHandler(this.notesFiltrationBtn_Click);
 			// 
 			// dateToNotesFiltrationLbl
 			// 
@@ -668,6 +663,18 @@
 			this.dateFromNotesFiltrationDtp.Name = "dateFromNotesFiltrationDtp";
 			this.dateFromNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
 			this.dateFromNotesFiltrationDtp.TabIndex = 9;
+			this.dateFromNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromNotesFiltrationDtp_ValueChanged);
+			// 
+			// checkItemsFiltrationTP
+			// 
+			this.checkItemsFiltrationTP.Controls.Add(this.checkItemsFiltrationTlp);
+			this.checkItemsFiltrationTP.Location = new System.Drawing.Point(4, 22);
+			this.checkItemsFiltrationTP.Name = "checkItemsFiltrationTP";
+			this.checkItemsFiltrationTP.Padding = new System.Windows.Forms.Padding(3);
+			this.checkItemsFiltrationTP.Size = new System.Drawing.Size(465, 106);
+			this.checkItemsFiltrationTP.TabIndex = 2;
+			this.checkItemsFiltrationTP.Text = "Filtrování";
+			this.checkItemsFiltrationTP.UseVisualStyleBackColor = true;
 			// 
 			// checkItemsFiltrationTlp
 			// 
@@ -690,15 +697,26 @@
 			this.checkItemsFiltrationTlp.Size = new System.Drawing.Size(459, 100);
 			this.checkItemsFiltrationTlp.TabIndex = 18;
 			// 
-			// checkItemsFiltrationBtn
+			// completedCheckItemsFiltrationCB
 			// 
-			this.checkItemsFiltrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkItemsFiltrationBtn.Location = new System.Drawing.Point(360, 76);
-			this.checkItemsFiltrationBtn.Name = "checkItemsFiltrationBtn";
-			this.checkItemsFiltrationBtn.Size = new System.Drawing.Size(96, 21);
-			this.checkItemsFiltrationBtn.TabIndex = 10;
-			this.checkItemsFiltrationBtn.Text = "Filtrování";
-			this.checkItemsFiltrationBtn.UseVisualStyleBackColor = true;
+			this.completedCheckItemsFiltrationCB.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.completedCheckItemsFiltrationCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.completedCheckItemsFiltrationCB.FormattingEnabled = true;
+			this.completedCheckItemsFiltrationCB.Location = new System.Drawing.Point(83, 36);
+			this.completedCheckItemsFiltrationCB.Name = "completedCheckItemsFiltrationCB";
+			this.completedCheckItemsFiltrationCB.Size = new System.Drawing.Size(228, 21);
+			this.completedCheckItemsFiltrationCB.TabIndex = 16;
+			this.completedCheckItemsFiltrationCB.SelectedIndexChanged += new System.EventHandler(this.completedCheckItemsFiltrationCB_SelectedIndexChanged);
+			// 
+			// completedCheckItemsFiltrationLbl
+			// 
+			this.completedCheckItemsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.completedCheckItemsFiltrationLbl.Location = new System.Drawing.Point(3, 33);
+			this.completedCheckItemsFiltrationLbl.Name = "completedCheckItemsFiltrationLbl";
+			this.completedCheckItemsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
+			this.completedCheckItemsFiltrationLbl.TabIndex = 15;
+			this.completedCheckItemsFiltrationLbl.Text = "Dokončenost";
+			this.completedCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// typeCheckItemsFiltrationLbl
 			// 
@@ -718,26 +736,18 @@
 			this.typeCheckItemsFiltrationCb.Name = "typeCheckItemsFiltrationCb";
 			this.typeCheckItemsFiltrationCb.Size = new System.Drawing.Size(228, 21);
 			this.typeCheckItemsFiltrationCb.TabIndex = 14;
+			this.typeCheckItemsFiltrationCb.TextChanged += new System.EventHandler(this.typeCheckItemsFiltrationCb_TextChanged);
 			// 
-			// completedCheckItemsFiltrationLbl
+			// checkItemsFiltrationBtn
 			// 
-			this.completedCheckItemsFiltrationLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.completedCheckItemsFiltrationLbl.Location = new System.Drawing.Point(3, 33);
-			this.completedCheckItemsFiltrationLbl.Name = "completedCheckItemsFiltrationLbl";
-			this.completedCheckItemsFiltrationLbl.Size = new System.Drawing.Size(74, 33);
-			this.completedCheckItemsFiltrationLbl.TabIndex = 15;
-			this.completedCheckItemsFiltrationLbl.Text = "Dokončenost";
-			this.completedCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// completedCheckItemsFiltrationCB
-			// 
-			this.completedCheckItemsFiltrationCB.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.completedCheckItemsFiltrationCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.completedCheckItemsFiltrationCB.FormattingEnabled = true;
-			this.completedCheckItemsFiltrationCB.Location = new System.Drawing.Point(83, 36);
-			this.completedCheckItemsFiltrationCB.Name = "completedCheckItemsFiltrationCB";
-			this.completedCheckItemsFiltrationCB.Size = new System.Drawing.Size(228, 21);
-			this.completedCheckItemsFiltrationCB.TabIndex = 16;
+			this.checkItemsFiltrationBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkItemsFiltrationBtn.Location = new System.Drawing.Point(360, 76);
+			this.checkItemsFiltrationBtn.Name = "checkItemsFiltrationBtn";
+			this.checkItemsFiltrationBtn.Size = new System.Drawing.Size(96, 21);
+			this.checkItemsFiltrationBtn.TabIndex = 10;
+			this.checkItemsFiltrationBtn.Text = "Filtrování";
+			this.checkItemsFiltrationBtn.UseVisualStyleBackColor = true;
+			this.checkItemsFiltrationBtn.Click += new System.EventHandler(this.checkItemsFiltrationBtn_Click);
 			// 
 			// MainForm
 			// 
@@ -763,10 +773,10 @@
 			this.checklistTlp.ResumeLayout(false);
 			this.filtrationTC.ResumeLayout(false);
 			this.recordsFiltrationTP.ResumeLayout(false);
-			this.notesFiltrationTP.ResumeLayout(false);
-			this.checkItemsFiltrationTP.ResumeLayout(false);
 			this.recordsFiltrationTlp.ResumeLayout(false);
+			this.notesFiltrationTP.ResumeLayout(false);
 			this.notesFiltrationTlp.ResumeLayout(false);
+			this.checkItemsFiltrationTP.ResumeLayout(false);
 			this.checkItemsFiltrationTlp.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();

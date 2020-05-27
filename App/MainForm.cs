@@ -24,8 +24,10 @@ namespace Eli.TimeManagement.App
 		private IList<Record> _records;
 		private IList<Note> _notes;
 		private IList<CheckItem> _checkItems;
-		private bool _activeFiltration;
-		private bool _reloadStop;
+		private bool _activeRecordsFiltration;
+		private bool _activeNotesFiltration;
+		private bool _activeCheckItemsFiltration;
+		private bool _reloadRecordsStop;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -50,7 +52,7 @@ namespace Eli.TimeManagement.App
 			var records = getRecords();
 			_records = records;
 			var types = _repo.GetAllTypes();
-			setFiltrationTypes(types);
+			setRecordsFiltrationTypes(types);
 			display(records);
 			setRecordButtonStates();
 		}
@@ -73,16 +75,16 @@ namespace Eli.TimeManagement.App
 
 		private IList<Record> getRecords()
 		{
-			var dateFrom = getDateFrom();
-			var dateTo = getDateTo();
-			var type = getType();
+			var dateFrom = getRecordsDateFrom();
+			var dateTo = getRecordsDateTo();
+			var type = getRecordsType();
 			return _repo.GetAll(type, dateFrom, dateTo);
 		}
 
 		private IList<Note> getNotes()
 		{
-			var dateFrom = getDateFrom();
-			var dateTo = getDateTo();
+			var dateFrom = getNotesDateFrom();
+			var dateTo = getNotesDateTo();
 			return _noteRepo.GetAll(dateFrom, dateTo);
 		}
 
@@ -91,23 +93,37 @@ namespace Eli.TimeManagement.App
 			return _checkItemRepo.GetAll(false);
 		}
 
-		private DateTime? getDateFrom()
+		private DateTime? getRecordsDateFrom()
 		{
-			return _activeFiltration
+			return _activeRecordsFiltration
 				? dateFromRecordsFiltrationDtp.Value.Date
 				: (DateTime?)null;
 		}
 
-		private DateTime? getDateTo()
+		private DateTime? getRecordsDateTo()
 		{
-			return _activeFiltration
+			return _activeRecordsFiltration
 				? dateToRecordsFiltrationDtp.Value.Date
 				: (DateTime?)null;
 		}
 
-		private string getType()
+		private DateTime? getNotesDateFrom()
 		{
-			var type = _activeFiltration
+			return _activeNotesFiltration
+				? dateFromNotesFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private DateTime? getNotesDateTo()
+		{
+			return _activeNotesFiltration
+				? dateToNotesFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private string getRecordsType()
+		{
+			var type = _activeRecordsFiltration
 				? typeRecordsFiltrationCb.Text
 				: null;
 			if (type == "")
@@ -371,9 +387,9 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
-		private void setFiltrationTypes(IList<string> types)
+		private void setRecordsFiltrationTypes(IList<string> types)
 		{
-			_reloadStop = true;
+			_reloadRecordsStop = true;
 			var originalValue = typeRecordsFiltrationCb.Text;
 			typeRecordsFiltrationCb.Items.Clear();
 			for (int i = 0; i < types.Count; i++)
@@ -381,59 +397,19 @@ namespace Eli.TimeManagement.App
 				typeRecordsFiltrationCb.Items.Add(types[i]);
 			}
 			typeRecordsFiltrationCb.Text = originalValue;
-			_reloadStop = false;
+			_reloadRecordsStop = false;
 		}
 
-		private void filtrationBtn_Click(object sender, EventArgs e)
-		{
-			_activeFiltration = !_activeFiltration;
-			if (_activeFiltration)
-			{
-				recordsFiltrationBtn.Text = "Zrušit filtrování";
-			}
-			else
-			{
-				recordsFiltrationBtn.Text = "Filtrování";
-			}
-			reloadRecords();
-			reloadNotes();
-		}
-
-		private void dateFromDtp_ValueChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration)
-			{
-				reloadRecords();
-				reloadNotes();
-			}
-		}
-
-		private void dateToDtp_ValueChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration)
-			{
-				reloadRecords();
-				reloadNotes();
-			}
-		}
-
-		private void typeCb_TextChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration && !_reloadStop)
-			{
-				reloadRecords();
-			}
-		}
-
+		//TODO - implementovat logiku filtrování zvlášť pro kažný tab
 		private void mainTc_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			typeRecordsFiltrationCb.Enabled = mainTc.SelectedIndex == 0;
+
 		}
 
 		private void statisticsBtn_Click(object sender, EventArgs e)
 		{
 			var statsCounter = new StatisticsCounter();
-			var stats = statsCounter.Count(getRecords(), getDateFrom(), getDateTo());
+			var stats = statsCounter.Count(getRecords(), getRecordsDateFrom(), getRecordsDateTo());
 			var dialogue = new StatisticsForm(stats);
 			dialogue.ShowDialog();
 		}
@@ -518,6 +494,98 @@ namespace Eli.TimeManagement.App
 		private void checklistLv_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			setCheckItemsButtonStates();
+		}
+
+		private void recordsFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeRecordsFiltration = !_activeRecordsFiltration;
+			if (_activeRecordsFiltration)
+			{
+				recordsFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				recordsFiltrationBtn.Text = "Filtrování";
+			}
+			reloadRecords();
+		}
+
+		private void notesFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeNotesFiltration = !_activeNotesFiltration;
+			if (_activeNotesFiltration)
+			{
+				notesFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				notesFiltrationBtn.Text = "Filtrování";
+			}
+			reloadNotes();
+		}
+
+		private void checkItemsFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeCheckItemsFiltration = !_activeCheckItemsFiltration;
+			if (_activeCheckItemsFiltration)
+			{
+				checkItemsFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				checkItemsFiltrationBtn.Text = "Filtrování";
+			}
+			reloadCheckItems();
+		}
+
+		private void dateFromRecordsFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void dateToRecordsFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void dateFromNotesFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void dateToNotesFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void typeRecordsFiltrationCb_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration && !_reloadRecordsStop)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void typeCheckItemsFiltrationCb_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void completedCheckItemsFiltrationCB_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
