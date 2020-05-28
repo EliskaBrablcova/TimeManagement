@@ -1,4 +1,5 @@
 ﻿using Eli.TimeManagement.Models.Entities;
+using Eli.TimeManagement.Models.Filtration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -69,10 +70,10 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(items);
 		}
 
-		public IList<CheckItem> GetAll(bool notCompletedOnly)
+		public IList<CheckItem> GetAll(Completion completion, string type)
 		{
 			var items = readFromFileOrdered();
-			if (!notCompletedOnly)
+			if (completion == Completion.All && type == null)
 			{
 				return items;
 			}
@@ -80,7 +81,7 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < items.Count; i++)
 			{
 				var item = items[i];
-				if (!item.Completed)
+				if ((type == null || item.Type == type) && (completion == Completion.All || (completion == Completion.Completed && item.Completed) || completion == Completion.NotCompleted && !item.Completed))
 				{
 					toReturn.Add(item);
 				}

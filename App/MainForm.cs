@@ -1,5 +1,6 @@
 ﻿using Eli.TimeManagement.App.Properties;
 using Eli.TimeManagement.Models.Entities;
+using Eli.TimeManagement.Models.Filtration;
 using Eli.TimeManagement.Models.Stats;
 using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
@@ -28,6 +29,11 @@ namespace Eli.TimeManagement.App
 		private bool _activeNotesFiltration;
 		private bool _activeCheckItemsFiltration;
 		private bool _reloadRecordsStop;
+		private bool _reloadCheckItemsStop;
+		private const string _checkItemCompletionAll = "Vše";
+		private const string _checkItemCompletionCompleted = "Dokončené";
+		private const string _checkItemCompletionNotCompleted = "Nedokončené";
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -36,10 +42,25 @@ namespace Eli.TimeManagement.App
 			_checkItemRepo = new CheckItemFileRepository("data\\checklist.json");
 		}
 
+		private void initCheckItemFiltration()
+		{
+			initCheckItemFiltrationCompletion();
+			checkItemsFiltrationBtn_Click(checkItemsFiltrationBtn, new EventArgs());
+		}
+
+		private void initCheckItemFiltrationCompletion()
+		{
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionAll);
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionCompleted);
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionNotCompleted);
+			completedCheckItemsFiltrationCB.SelectedIndex = 2;
+		}
+
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			reloadAll();
 			showRecordsFiltrationTab();
+			initCheckItemFiltration();
 		}
 		private void reloadAll()
 		{
@@ -71,7 +92,22 @@ namespace Eli.TimeManagement.App
 			var items = getCheckItems();
 			_checkItems = items;
 			display(items, _checkItemRepo.GetAllTypes());
+			var types = _checkItemRepo.GetAllTypes();
+			setCheckItemsFiltrationTypes(types);
 			setCheckItemsButtonStates();
+		}
+
+		private void setCheckItemsFiltrationTypes(IList<string> types)
+		{
+			_reloadCheckItemsStop = true;
+			var originalValue = typeCheckItemsFiltrationCb.Text;
+			typeCheckItemsFiltrationCb.Items.Clear();
+			for (int i = 0; i < types.Count; i++)
+			{
+				typeCheckItemsFiltrationCb.Items.Add(types[i]);
+			}
+			typeCheckItemsFiltrationCb.Text = originalValue;
+			_reloadCheckItemsStop = false;
 		}
 
 		private IList<Record> getRecords()
@@ -91,7 +127,37 @@ namespace Eli.TimeManagement.App
 
 		private IList<CheckItem> getCheckItems()
 		{
-			return _checkItemRepo.GetAll(false);
+			var type = getCheckItemsType();
+			var completion = getCheckItemsCompletion();
+			return _checkItemRepo.GetAll(completion, type);
+		}
+
+		private Completion getCheckItemsCompletion()
+		{
+			if (_activeCheckItemsFiltration)
+			{
+				if ((string)completedCheckItemsFiltrationCB.SelectedItem == _checkItemCompletionNotCompleted)
+				{
+					return Completion.NotCompleted;
+				}
+				else if ((string)completedCheckItemsFiltrationCB.SelectedItem == _checkItemCompletionCompleted)
+				{
+					return Completion.Completed;
+				}
+			}
+			return Completion.All;
+		}
+
+		private string getCheckItemsType()
+		{
+			var type = _activeCheckItemsFiltration
+				? typeCheckItemsFiltrationCb.Text
+				: null;
+			if (type == "")
+			{
+				type = null;
+			}
+			return type;
 		}
 
 		private DateTime? getRecordsDateFrom()
@@ -613,12 +679,18 @@ namespace Eli.TimeManagement.App
 
 		private void typeCheckItemsFiltrationCb_TextChanged(object sender, EventArgs e)
 		{
-
+			if (_activeCheckItemsFiltration && !_reloadCheckItemsStop)
+			{
+				reloadCheckItems();
+			}
 		}
 
 		private void completedCheckItemsFiltrationCB_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
+			if (_activeCheckItemsFiltration)
+			{
+				reloadCheckItems();
+			}
 		}
 	}
 }
