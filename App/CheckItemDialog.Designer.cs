@@ -161,6 +161,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(364, 231);
 			this.Name = "CheckItemDialog";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "CheckItemDialog";
 			this.Load += new System.EventHandler(this.CheckItemDialog_Load);
 			this.checkItemDialogTlp.ResumeLayout(false);
