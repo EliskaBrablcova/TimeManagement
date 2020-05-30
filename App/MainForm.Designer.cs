@@ -143,7 +143,7 @@
 			// recordDescriptionCh
 			// 
 			this.recordDescriptionCh.Text = "Popis aktivity";
-			this.recordDescriptionCh.Width = 169;
+			this.recordDescriptionCh.Width = 143;
 			// 
 			// logoPb
 			// 
@@ -329,7 +329,7 @@
 			// noteTextCh
 			// 
 			this.noteTextCh.Text = "Poznámka";
-			this.noteTextCh.Width = 346;
+			this.noteTextCh.Width = 320;
 			// 
 			// editNoteBtn
 			// 
