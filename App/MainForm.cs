@@ -4,6 +4,7 @@ using Eli.TimeManagement.Models.Filtration;
 using Eli.TimeManagement.Models.Stats;
 using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
+using Eli.TimeManagement.FormsLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -378,7 +379,7 @@ namespace Eli.TimeManagement.App
 			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				var result = MessageBox.Show("Opravdu chcete smazat záznam?", "Varování", MessageBoxButtons.YesNo);
+				var result = new CustomMessageBox("Varování", "Opravdu chcete záznam smazat?").ShowDialog();
 				if (result == DialogResult.Yes)
 				{
 					var selectedIndex = selected[0];
@@ -434,7 +435,7 @@ namespace Eli.TimeManagement.App
 			var selected = notesLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				var result = MessageBox.Show("Opravdu chcete poznámku smazat?", "Varování", MessageBoxButtons.YesNo);
+				var result = new CustomMessageBox("Varování", "Opravdu chcete poznámku smazat?").ShowDialog();
 				if (result == DialogResult.Yes)
 				{
 					var selectedIndex = selected[0];
@@ -570,7 +571,7 @@ namespace Eli.TimeManagement.App
 			var selected = checklistLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				var result = MessageBox.Show("Opravdu chcete smazat úkol?", "Varování", MessageBoxButtons.YesNo);
+				var result = new CustomMessageBox("Varování", "Opravdu chcete úkol smazat?").ShowDialog();
 				if (result == DialogResult.Yes)
 				{
 					var selectedIndex = selected[0];

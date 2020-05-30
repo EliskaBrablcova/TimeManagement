@@ -120,6 +120,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FormsLibrary\FormsLibrary.csproj">
+      <Project>{98b3f09b-5104-414d-aa4f-45232234e6c3}</Project>
+      <Name>FormsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{D494481F-3B4E-497D-A8E7-8001657AAB70}</Project>
       <Name>Models</Name>
