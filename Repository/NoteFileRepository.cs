@@ -67,8 +67,8 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < notes.Count; i++)
 			{
 				var note = notes[i];
-				if ((dateFrom == null || note.Edited.Date >= dateFrom) && (dateTo == null || note.Edited.Date <= dateTo))
-				{
+				if (matchDateFrom(dateFrom, note) && matchDateTo(dateTo, note) && matchFulltext(contains, note))
+				{b
 					toReturn.Add(note);
 				}
 			}
@@ -128,6 +128,22 @@ namespace Eli.TimeManagement.Repository
 			//	}
 			//}
 			return id + 1;
+		}
+
+		private bool matchDateFrom(DateTime? dateFrom, Note note)
+		{
+			return dateFrom == null || note.Edited >= dateFrom;
+		}
+
+		private bool matchDateTo(DateTime? dateTo, Note note)
+		{
+			return dateTo == null || note.Edited <= dateTo;
+		}
+
+		// ?? == coalesce
+		private bool matchFulltext(string contains, Note note)
+		{
+			return contains == null || (note.Text?.ToLowerInvariant().Contains(contains.ToLowerInvariant()) ?? false);
 		}
 
 	}

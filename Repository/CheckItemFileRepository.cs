@@ -73,7 +73,7 @@ namespace Eli.TimeManagement.Repository
 		public IList<CheckItem> GetAll(Completion completion, string type, string contains)
 		{
 			var items = readFromFileOrdered();
-			if (completion == Completion.All && type == null)
+			if (completion == Completion.All && type == null && contains == null)
 			{
 				return items;
 			}
@@ -81,13 +81,15 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < items.Count; i++)
 			{
 				var item = items[i];
-				if ((type == null || item.Type == type) && (completion == Completion.All || (completion == Completion.Completed && item.Completed) || completion == Completion.NotCompleted && !item.Completed))
+				if (matchType(type, item) && matchCompletion(completion, item) && matchFulltext(contains, item))
 				{
 					toReturn.Add(item);
 				}
 			}
 			return toReturn;
 		}
+
+
 		public IList<string> GetAllTypes()
 		{
 			var items = readFromFile();
@@ -152,6 +154,22 @@ namespace Eli.TimeManagement.Repository
 				}
 			}
 			return id + 1;
+		}
+
+		private bool matchType(string type, CheckItem item)
+		{
+			return type == null || item.Type == type;
+		}
+
+		private bool matchCompletion(Completion completion, CheckItem item)
+		{
+			return (completion == Completion.All || (completion == Completion.Completed && item.Completed) || completion == Completion.NotCompleted && !item.Completed);
+		}
+
+		// ?? == coalesce
+		private bool matchFulltext(string contains, CheckItem item)
+		{
+			return contains == null || (item.Text?.ToLowerInvariant().Contains(contains.ToLowerInvariant()) ?? false);
 		}
 	}
 }
