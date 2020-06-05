@@ -75,7 +75,7 @@ namespace Eli.TimeManagement.Repository
 			return types;
 		}
 
-		public IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo)
+		public IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo, string contains)
 		{
 			var AllRecords = readFromFileOrdered();
 			if (type == null && dateFrom == null && dateTo == null)

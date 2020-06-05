@@ -116,21 +116,60 @@ namespace Eli.TimeManagement.App
 			var dateFrom = getRecordsDateFrom();
 			var dateTo = getRecordsDateTo();
 			var type = getRecordsType();
-			return _repo.GetAll(type, dateFrom, dateTo);
+			var contains = getRecordsContains();
+			return _repo.GetAll(type, dateFrom, dateTo, contains);
+		}
+
+		private string getRecordsContains()
+		{
+			if (containsRecordsFiltrationTB.Text == "" || !_activeRecordsFiltration)
+			{
+				return null;
+			}
+			else
+			{
+				return containsRecordsFiltrationTB.Text;
+			}
 		}
 
 		private IList<Note> getNotes()
 		{
 			var dateFrom = getNotesDateFrom();
 			var dateTo = getNotesDateTo();
-			return _noteRepo.GetAll(dateFrom, dateTo);
+			var contains = getNotesContains();
+			return _noteRepo.GetAll(dateFrom, dateTo, contains);
+		}
+
+		private string getNotesContains()
+		{
+			if (containsNotesFiltrationTB.Text == "" || !_activeNotesFiltration)
+			{
+				return null;
+			}
+			else
+			{
+				return containsNotesFiltrationTB.Text;
+			}
 		}
 
 		private IList<CheckItem> getCheckItems()
 		{
 			var type = getCheckItemsType();
 			var completion = getCheckItemsCompletion();
-			return _checkItemRepo.GetAll(completion, type);
+			var contains = getCheckItemsContains();
+			return _checkItemRepo.GetAll(completion, type, contains);
+		}
+
+		private string getCheckItemsContains()
+		{
+			if (containsCheckItemsFiltrationTB.Text == "" || !_activeCheckItemsFiltration)
+			{
+				return null;
+			}
+			else
+			{
+				return containsCheckItemsFiltrationTB.Text;
+			}
 		}
 
 		private Completion getCheckItemsCompletion()
@@ -687,6 +726,30 @@ namespace Eli.TimeManagement.App
 		}
 
 		private void completedCheckItemsFiltrationCB_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (_activeCheckItemsFiltration)
+			{
+				reloadCheckItems();
+			}
+		}
+
+		private void containsRecordsFiltrationTB_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void containsNotesFiltrationTB_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void containsCheckItemsFiltrationTB_TextChanged(object sender, EventArgs e)
 		{
 			if (_activeCheckItemsFiltration)
 			{

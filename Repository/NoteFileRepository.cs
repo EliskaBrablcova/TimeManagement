@@ -56,7 +56,7 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(notes);
 		}
 
-		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo)
+		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo, string contains)
 		{
 			var notes = readFromFileOrdered();
 			if (dateFrom == null && dateTo == null)

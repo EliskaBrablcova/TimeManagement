@@ -8,7 +8,7 @@ namespace Eli.TimeManagement.Repository
 {
 	public interface ICheckItemRepository
 	{
-		IList<CheckItem> GetAll(Completion completion, string type);
+		IList<CheckItem> GetAll(Completion completion, string type, string contains);
 		void Add(CheckItem newCheckItem);
 		void Edit(CheckItem editCheckItem);
 		void Delete(int id);

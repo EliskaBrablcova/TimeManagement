@@ -782,6 +782,7 @@
 			this.containsRecordsFiltrationTB.Name = "containsRecordsFiltrationTB";
 			this.containsRecordsFiltrationTB.Size = new System.Drawing.Size(228, 20);
 			this.containsRecordsFiltrationTB.TabIndex = 16;
+			this.containsRecordsFiltrationTB.TextChanged += new System.EventHandler(this.containsRecordsFiltrationTB_TextChanged);
 			// 
 			// containsNotesFiltrationTB
 			// 
@@ -790,6 +791,7 @@
 			this.containsNotesFiltrationTB.Name = "containsNotesFiltrationTB";
 			this.containsNotesFiltrationTB.Size = new System.Drawing.Size(228, 20);
 			this.containsNotesFiltrationTB.TabIndex = 17;
+			this.containsNotesFiltrationTB.TextChanged += new System.EventHandler(this.containsNotesFiltrationTB_TextChanged);
 			// 
 			// containsCheckItemsFiltrationTB
 			// 
@@ -798,6 +800,7 @@
 			this.containsCheckItemsFiltrationTB.Name = "containsCheckItemsFiltrationTB";
 			this.containsCheckItemsFiltrationTB.Size = new System.Drawing.Size(228, 20);
 			this.containsCheckItemsFiltrationTB.TabIndex = 17;
+			this.containsCheckItemsFiltrationTB.TextChanged += new System.EventHandler(this.containsCheckItemsFiltrationTB_TextChanged);
 			// 
 			// containsCheckItemsFiltrationLbl
 			// 

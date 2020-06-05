@@ -70,7 +70,7 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(items);
 		}
 
-		public IList<CheckItem> GetAll(Completion completion, string type)
+		public IList<CheckItem> GetAll(Completion completion, string type, string contains)
 		{
 			var items = readFromFileOrdered();
 			if (completion == Completion.All && type == null)
