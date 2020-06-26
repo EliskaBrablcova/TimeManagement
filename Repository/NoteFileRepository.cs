@@ -68,7 +68,7 @@ namespace Eli.TimeManagement.Repository
 			{
 				var note = notes[i];
 				if (matchDateFrom(dateFrom, note) && matchDateTo(dateTo, note) && matchFulltext(contains, note))
-				{b
+				{
 					toReturn.Add(note);
 				}
 			}
