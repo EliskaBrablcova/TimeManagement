@@ -11,6 +11,7 @@ namespace Eli.TimeManagement.FormsLibrary
 			InitializeComponent();
 			dtp.ValueChanged += Dtp_ValueChanged;
 			dtp.KeyDown += Dtp_KeyDown;
+			Value = Value;
 		}
 
 		private DateTime? _value;
