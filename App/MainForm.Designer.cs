@@ -71,6 +71,8 @@
 			this.recordsFiltrationBtn = new System.Windows.Forms.Button();
 			this.containsRecordsFiltrationLbl = new System.Windows.Forms.Label();
 			this.containsRecordsFiltrationTB = new System.Windows.Forms.TextBox();
+			this.dateFromRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
+			this.dateToRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
 			this.notesFiltrationTP = new System.Windows.Forms.TabPage();
 			this.notesFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.containsNotesFiltrationLbl = new System.Windows.Forms.Label();
@@ -89,8 +91,6 @@
 			this.checkItemsFiltrationBtn = new System.Windows.Forms.Button();
 			this.containsCheckItemsFiltrationTB = new System.Windows.Forms.TextBox();
 			this.containsCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
-			this.dateFromRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
-			this.dateToRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -587,6 +587,26 @@
 			this.containsRecordsFiltrationTB.TabIndex = 16;
 			this.containsRecordsFiltrationTB.TextChanged += new System.EventHandler(this.containsRecordsFiltrationTB_TextChanged);
 			// 
+			// dateFromRecordsFiltrationDtp
+			// 
+			this.dateFromRecordsFiltrationDtp.CustomFormat = null;
+			this.dateFromRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 3);
+			this.dateFromRecordsFiltrationDtp.Name = "dateFromRecordsFiltrationDtp";
+			this.dateFromRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateFromRecordsFiltrationDtp.TabIndex = 17;
+			this.dateFromRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromRecordsFiltrationDtp_ValueChanged);
+			// 
+			// dateToRecordsFiltrationDtp
+			// 
+			this.dateToRecordsFiltrationDtp.CustomFormat = null;
+			this.dateToRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 29);
+			this.dateToRecordsFiltrationDtp.Name = "dateToRecordsFiltrationDtp";
+			this.dateToRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateToRecordsFiltrationDtp.TabIndex = 18;
+			this.dateToRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToRecordsFiltrationDtp_ValueChanged);
+			// 
 			// notesFiltrationTP
 			// 
 			this.notesFiltrationTP.Controls.Add(this.notesFiltrationTlp);
@@ -800,26 +820,6 @@
 			this.containsCheckItemsFiltrationLbl.TabIndex = 18;
 			this.containsCheckItemsFiltrationLbl.Text = "Obsahuje";
 			this.containsCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// dateFromRecordsFiltrationDtp
-			// 
-			this.dateFromRecordsFiltrationDtp.CustomFormat = null;
-			this.dateFromRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateFromRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 3);
-			this.dateFromRecordsFiltrationDtp.Name = "dateFromRecordsFiltrationDtp";
-			this.dateFromRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
-			this.dateFromRecordsFiltrationDtp.TabIndex = 17;
-			this.dateFromRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromRecordsFiltrationDtp_ValueChanged);
-			// 
-			// dateToRecordsFiltrationDtp
-			// 
-			this.dateToRecordsFiltrationDtp.CustomFormat = null;
-			this.dateToRecordsFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateToRecordsFiltrationDtp.Location = new System.Drawing.Point(83, 29);
-			this.dateToRecordsFiltrationDtp.Name = "dateToRecordsFiltrationDtp";
-			this.dateToRecordsFiltrationDtp.Size = new System.Drawing.Size(228, 20);
-			this.dateToRecordsFiltrationDtp.TabIndex = 18;
-			this.dateToRecordsFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToRecordsFiltrationDtp_ValueChanged);
 			// 
 			// MainForm
 			// 
