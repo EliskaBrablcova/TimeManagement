@@ -203,15 +203,15 @@ namespace Eli.TimeManagement.App
 		private DateTime? getRecordsDateFrom()
 		{
 			return _activeRecordsFiltration
-				? dateFromRecordsFiltrationDtp.Value.Date
-				: (DateTime?)null;
+				? dateFromRecordsFiltrationDtp.Value?.Date
+				: null;
 		}
 
 		private DateTime? getRecordsDateTo()
 		{
 			return _activeRecordsFiltration
-				? dateToRecordsFiltrationDtp.Value.Date
-				: (DateTime?)null;
+				? dateToRecordsFiltrationDtp.Value?.Date
+				: null;
 		}
 
 		private DateTime? getNotesDateFrom()
