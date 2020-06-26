@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Eli.TimeManagement.Repository
@@ -74,9 +75,9 @@ namespace Eli.TimeManagement.Repository
 			return types;
 		}
 
-		public IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo)
+		public IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo, string contains)
 		{
-			var AllRecords = readFromFile();
+			var AllRecords = readFromFileOrdered();
 			if (type == null && dateFrom == null && dateTo == null)
 			{
 				return AllRecords;
@@ -85,15 +86,23 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < AllRecords.Count; i++)
 			{
 				var record = AllRecords[i];
-				if ((type == null || record.Type == type) 
-					&& (dateFrom == null || record.Start >= dateFrom) 
-					&& (dateTo == null || record.Start <= dateTo))
+				if (matchType(type, record) 
+					&& matchDateFrom(dateFrom, record) 
+					&& matchDateTo(dateTo, record)
+					&& matchFulltext(contains, record))
 				{
 					toReturn.Add(record);
 				}
 			}
 			return toReturn;
 		}
+
+		private List<Record> readFromFileOrdered()
+		{
+			var records = readFromFile();
+			return records.OrderByDescending(c => c.Start).ThenBy(c => c.ID).ToList();
+		}
+
 		private List<Record> readFromFile()
 		{
 			//TODO toto Eli ještě neviděla
@@ -135,5 +144,24 @@ namespace Eli.TimeManagement.Repository
 			return null;
 		}
 
+		private bool matchType(string type, Record record)
+		{
+			return type == null || record.Type == type;
+		}
+
+		private bool matchDateFrom(DateTime? dateFrom, Record record)
+		{
+			return dateFrom == null || record.Start >= dateFrom;
+		}
+
+		private bool matchDateTo(DateTime? dateTo, Record record)
+		{
+			return dateTo == null || record.Start <= dateTo;
+		}
+		// ?? == coalesce
+		private bool matchFulltext(string contains, Record record)
+		{
+			return contains == null || (record.Description?.ToLowerInvariant().Contains(contains.ToLowerInvariant()) ?? false);
+		}
 	}
 }

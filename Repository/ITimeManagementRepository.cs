@@ -7,7 +7,7 @@ namespace Eli.TimeManagement.Repository
 {
 	public interface ITimeManagementRepository
 	{
-		IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo);
+		IList<Record> GetAll(string type, DateTime? dateFrom, DateTime? dateTo, string contains);
 		void Add(Record newRecord);
 		void Edit(Record editRecord);
 		void Delete(int id);

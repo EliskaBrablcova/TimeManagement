@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Eli.TimeManagement.Repository
@@ -55,9 +56,9 @@ namespace Eli.TimeManagement.Repository
 			saveToFile(notes);
 		}
 
-		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo)
+		public IList<Note> GetAll(DateTime? dateFrom, DateTime? dateTo, string contains)
 		{
-			var notes = readFromFile();
+			var notes = readFromFileOrdered();
 			if (dateFrom == null && dateTo == null)
 			{
 				return notes;
@@ -66,12 +67,18 @@ namespace Eli.TimeManagement.Repository
 			for (int i = 0; i < notes.Count; i++)
 			{
 				var note = notes[i];
-				if ((dateFrom == null || note.Edited.Date >= dateFrom) && (dateTo == null || note.Edited.Date <= dateTo))
-				{
+				if (matchDateFrom(dateFrom, note) && matchDateTo(dateTo, note) && matchFulltext(contains, note))
+				{b
 					toReturn.Add(note);
 				}
 			}
 			return toReturn;
+		}
+
+		private List<Note> readFromFileOrdered()
+		{
+			var notes = readFromFile();
+			return notes.OrderByDescending(c => c.Edited).ThenBy(c => c.ID).ToList();
 		}
 		private List<Note> readFromFile()
 		{
@@ -121,6 +128,22 @@ namespace Eli.TimeManagement.Repository
 			//	}
 			//}
 			return id + 1;
+		}
+
+		private bool matchDateFrom(DateTime? dateFrom, Note note)
+		{
+			return dateFrom == null || note.Edited >= dateFrom;
+		}
+
+		private bool matchDateTo(DateTime? dateTo, Note note)
+		{
+			return dateTo == null || note.Edited <= dateTo;
+		}
+
+		// ?? == coalesce
+		private bool matchFulltext(string contains, Note note)
+		{
+			return contains == null || (note.Text?.ToLowerInvariant().Contains(contains.ToLowerInvariant()) ?? false);
 		}
 
 	}

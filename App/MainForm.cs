@@ -1,5 +1,10 @@
-﻿using Eli.TimeManagement.Models.Entities;
+﻿using Eli.TimeManagement.App.Properties;
+using Eli.TimeManagement.Models.Entities;
+using Eli.TimeManagement.Models.Filtration;
+using Eli.TimeManagement.Models.Stats;
+using Eli.TimeManagement.Models.ViewModels;
 using Eli.TimeManagement.Repository;
+using Eli.TimeManagement.FormsLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,69 +22,223 @@ namespace Eli.TimeManagement.App
 	{
 		private ITimeManagementRepository _repo;
 		private INoteRepository _noteRepo;
+		private ICheckItemRepository _checkItemRepo;
 		private IList<Record> _records;
 		private IList<Note> _notes;
-		private bool _activeFiltration;
-		private bool _reloadStop;
+		private IList<CheckItem> _checkItems;
+		private bool _activeRecordsFiltration;
+		private bool _activeNotesFiltration;
+		private bool _activeCheckItemsFiltration;
+		private bool _reloadRecordsStop;
+		private bool _reloadCheckItemsStop;
+		private const string _checkItemCompletionAll = "Vše";
+		private const string _checkItemCompletionCompleted = "Dokončené";
+		private const string _checkItemCompletionNotCompleted = "Nedokončené";
+
 		public MainForm()
 		{
 			InitializeComponent();
 			_repo = new TimeManagementFileRepository("data\\data.json");
 			_noteRepo = new NoteFileRepository("data\\notes.json");
+			_checkItemRepo = new CheckItemFileRepository("data\\checklist.json");
+		}
+
+		private void initCheckItemFiltration()
+		{
+			initCheckItemFiltrationCompletion();
+			checkItemsFiltrationBtn_Click(checkItemsFiltrationBtn, new EventArgs());
+		}
+
+		private void initCheckItemFiltrationCompletion()
+		{
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionAll);
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionCompleted);
+			completedCheckItemsFiltrationCB.Items.Add(_checkItemCompletionNotCompleted);
+			completedCheckItemsFiltrationCB.SelectedIndex = 2;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			reload();
+			reloadAll();
+			showRecordsFiltrationTab();
+			initCheckItemFiltration();
 		}
-		private void reload()
+		private void reloadAll()
 		{
-			var records = getRecords();
-			var notes = getNotes();
-			var types = _repo.GetAllTypes();
-			_records = records;
-			_notes = notes;
-			display(records);
-			display(notes);
-			setRecordButtonStates();
-			setNotesButtonStates();
-			setFiltrationTypes(types);
+			reloadRecords();
+			reloadNotes();
+			reloadCheckItems();
 		}
 
+		private void reloadRecords()
+		{
+			var records = getRecords();
+			_records = records;
+			var types = _repo.GetAllTypes();
+			setRecordsFiltrationTypes(types);
+			display(records);
+			setRecordButtonStates();
+		}
+
+		private void reloadNotes()
+		{
+			var notes = getNotes();
+			_notes = notes;
+			display(notes);
+			setNotesButtonStates();
+		}
+
+		private void reloadCheckItems()
+		{
+			var items = getCheckItems();
+			_checkItems = items;
+			display(items, _checkItemRepo.GetAllTypes());
+			var types = _checkItemRepo.GetAllTypes();
+			setCheckItemsFiltrationTypes(types);
+			setCheckItemsButtonStates();
+		}
+
+		private void setCheckItemsFiltrationTypes(IList<string> types)
+		{
+			_reloadCheckItemsStop = true;
+			var originalValue = typeCheckItemsFiltrationCb.Text;
+			typeCheckItemsFiltrationCb.Items.Clear();
+			for (int i = 0; i < types.Count; i++)
+			{
+				typeCheckItemsFiltrationCb.Items.Add(types[i]);
+			}
+			typeCheckItemsFiltrationCb.Text = originalValue;
+			_reloadCheckItemsStop = false;
+		}
 
 		private IList<Record> getRecords()
 		{
-			if (_activeFiltration)
+			var dateFrom = getRecordsDateFrom();
+			var dateTo = getRecordsDateTo();
+			var type = getRecordsType();
+			var contains = getRecordsContains();
+			return _repo.GetAll(type, dateFrom, dateTo, contains);
+		}
+
+		private string getRecordsContains()
+		{
+			if (containsRecordsFiltrationTB.Text == "" || !_activeRecordsFiltration)
 			{
-				var dateFrom = dateFromDtp.NullableValue?.Date;
-				var dateTo = dateToDtp.NullableValue?.Date;
-				var type = typeCb.Text;
-				if (type == "")
-				{
-					type = null;
-				}
-				return _repo.GetAll(type, dateFrom, dateTo);
+				return null;
 			}
 			else
 			{
-				return _repo.GetAll(null, null, null);
+				return containsRecordsFiltrationTB.Text;
 			}
 		}
 
 		private IList<Note> getNotes()
 		{
-			if (_activeFiltration)
+			var dateFrom = getNotesDateFrom();
+			var dateTo = getNotesDateTo();
+			var contains = getNotesContains();
+			return _noteRepo.GetAll(dateFrom, dateTo, contains);
+		}
+
+		private string getNotesContains()
+		{
+			if (containsNotesFiltrationTB.Text == "" || !_activeNotesFiltration)
 			{
-				var dateFrom = dateFromDtp.Value.Date;
-				var dateTo = dateToDtp.Value.Date;
-				return _noteRepo.GetAll(dateFrom, dateTo);
+				return null;
 			}
 			else
 			{
-				return _noteRepo.GetAll(null, null);
+				return containsNotesFiltrationTB.Text;
 			}
 		}
 
+		private IList<CheckItem> getCheckItems()
+		{
+			var type = getCheckItemsType();
+			var completion = getCheckItemsCompletion();
+			var contains = getCheckItemsContains();
+			return _checkItemRepo.GetAll(completion, type, contains);
+		}
+
+		private string getCheckItemsContains()
+		{
+			if (containsCheckItemsFiltrationTB.Text == "" || !_activeCheckItemsFiltration)
+			{
+				return null;
+			}
+			else
+			{
+				return containsCheckItemsFiltrationTB.Text;
+			}
+		}
+
+		private Completion getCheckItemsCompletion()
+		{
+			if (_activeCheckItemsFiltration)
+			{
+				if ((string)completedCheckItemsFiltrationCB.SelectedItem == _checkItemCompletionNotCompleted)
+				{
+					return Completion.NotCompleted;
+				}
+				else if ((string)completedCheckItemsFiltrationCB.SelectedItem == _checkItemCompletionCompleted)
+				{
+					return Completion.Completed;
+				}
+			}
+			return Completion.All;
+		}
+
+		private string getCheckItemsType()
+		{
+			var type = _activeCheckItemsFiltration
+				? typeCheckItemsFiltrationCb.Text
+				: null;
+			if (type == "")
+			{
+				type = null;
+			}
+			return type;
+		}
+
+		private DateTime? getRecordsDateFrom()
+		{
+			return _activeRecordsFiltration
+				? dateFromRecordsFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private DateTime? getRecordsDateTo()
+		{
+			return _activeRecordsFiltration
+				? dateToRecordsFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private DateTime? getNotesDateFrom()
+		{
+			return _activeNotesFiltration
+				? dateFromNotesFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private DateTime? getNotesDateTo()
+		{
+			return _activeNotesFiltration
+				? dateToNotesFiltrationDtp.Value.Date
+				: (DateTime?)null;
+		}
+
+		private string getRecordsType()
+		{
+			var type = _activeRecordsFiltration
+				? typeRecordsFiltrationCb.Text
+				: null;
+			if (type == "")
+			{
+				type = null;
+			}
+			return type;
+		}
 		private void display(IList<Record> records)
 		{
 			recordsLv.Items.Clear();
@@ -98,6 +257,19 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
+		private void display(IList<CheckItem> items, IList<string> types)
+		{
+			checklistLv.Items.Clear();
+			checklistLv.Groups.Clear();
+			foreach (var type in types)
+			{
+				checklistLv.Groups.Add(type, type);
+			}
+			for (int i = 0; i < items.Count; i++)
+			{
+				addRow(items[i]);
+			}
+		}
 
 		private void addRow(Record record)
 		{
@@ -111,6 +283,15 @@ namespace Eli.TimeManagement.App
 			var texts = new string[] { note.Edited.ToString(), note.Text.Replace("\r\n", " ") };
 			var item = new ListViewItem(texts);
 			notesLv.Items.Add(item);
+		}
+
+		private void addRow(CheckItem checkItem)
+		{
+			var texts = new string[] { checkItem.Text.Replace("\r\n", " ") };
+			var item = new ListViewItem(texts);
+			item.Group = checklistLv.Groups[checkItem.Type];
+			item.StateImageIndex = checkItem.Completed ? 1 : 0;
+			checklistLv.Items.Add(item);
 		}
 
 		private void deleteRecordBtn_Click(object sender, EventArgs e)
@@ -150,6 +331,27 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
+		private void setCheckItemsButtonStates()
+		{
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				setCheckItemsButtonStates(true);
+				if (_checkItems[selected[0]].Completed)
+				{
+					completeCheckItemBtn.Enabled = false;
+				}
+				else
+				{
+					completeCheckItemBtn.Enabled = true;
+				}
+			}
+			else
+			{
+				setCheckItemsButtonStates(false);
+			}
+		}
+
 
 		private void setRecordButtonStates(bool enabled)
 		{
@@ -163,6 +365,16 @@ namespace Eli.TimeManagement.App
 			editNoteBtn.Enabled = enabled;
 		}
 
+		private void setCheckItemsButtonStates(bool enabled)
+		{
+			deleteCheckItemBtn.Enabled = enabled;
+			editCheckItemBtn.Enabled = enabled;
+			if (!enabled)
+			{
+				completeCheckItemBtn.Enabled = enabled;
+			}
+		}
+
 		private void createRecordBtn_Click(object sender, EventArgs e)
 		{
 			var record = new Record();
@@ -171,7 +383,7 @@ namespace Eli.TimeManagement.App
 			if (result == DialogResult.OK)
 			{
 				_repo.Add(dialog.Item);
-				reload();
+				reloadRecords();
 			}
 		}
 
@@ -188,7 +400,7 @@ namespace Eli.TimeManagement.App
 				if (result == DialogResult.OK)
 				{
 					_repo.Edit(dialog.Item);
-					reload();
+					reloadRecords();
 				}
 			}
 		}
@@ -206,13 +418,13 @@ namespace Eli.TimeManagement.App
 			var selected = recordsLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				var result = MessageBox.Show("Opravdu chcete smazat záznam?", "Varování", MessageBoxButtons.YesNo);
+				var result = new CustomMessageBox("Varování", "Opravdu chcete záznam smazat?").ShowDialog();
 				if (result == DialogResult.Yes)
 				{
 					var selectedIndex = selected[0];
 					var id = _records[selectedIndex].ID;
 					_repo.Delete(id);
-					reload();
+					reloadRecords();
 				}
 			}
 			setRecordButtonStates();
@@ -225,7 +437,7 @@ namespace Eli.TimeManagement.App
 			if (result == DialogResult.OK)
 			{
 				_noteRepo.Add(dialog.Item);
-				reload();
+				reloadNotes();
 			}
 		}
 
@@ -242,7 +454,7 @@ namespace Eli.TimeManagement.App
 				if (result == DialogResult.OK)
 				{
 					_noteRepo.Edit(dialog.Item);
-					reload();
+					reloadNotes();
 				}
 			}
 		}
@@ -262,13 +474,13 @@ namespace Eli.TimeManagement.App
 			var selected = notesLv.SelectedIndices;
 			if (selected.Count == 1)
 			{
-				var result = MessageBox.Show("Opravdu chcete poznámku smazat?", "Varování", MessageBoxButtons.YesNo);
+				var result = new CustomMessageBox("Varování", "Opravdu chcete poznámku smazat?").ShowDialog();
 				if (result == DialogResult.Yes)
 				{
 					var selectedIndex = selected[0];
 					var id = _notes[selectedIndex].ID;
 					_noteRepo.Delete(id);
-					reload();
+					reloadNotes();
 				}
 			}
 			setNotesButtonStates();
@@ -282,60 +494,267 @@ namespace Eli.TimeManagement.App
 			}
 		}
 
-		private void setFiltrationTypes(IList<string> types)
+		private void setRecordsFiltrationTypes(IList<string> types)
 		{
-			_reloadStop = true;
-			var originalValue = typeCb.Text;
-			typeCb.Items.Clear();
+			_reloadRecordsStop = true;
+			var originalValue = typeRecordsFiltrationCb.Text;
+			typeRecordsFiltrationCb.Items.Clear();
 			for (int i = 0; i < types.Count; i++)
 			{
-				typeCb.Items.Add(types[i]);
+				typeRecordsFiltrationCb.Items.Add(types[i]);
 			}
-			typeCb.Text = originalValue;
-			_reloadStop = false;
-		}
-
-		private void filtrationBtn_Click(object sender, EventArgs e)
-		{
-			_activeFiltration = !_activeFiltration;
-			if (_activeFiltration)
-			{
-				filtrationBtn.Text = "Zrušit filtrování";
-			}
-			else
-			{
-				filtrationBtn.Text = "Filtrování";
-			}
-			reload();
-		}
-
-		private void dateFromDtp_ValueChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration)
-			{
-				reload();
-			}
-		}
-
-		private void dateToDtp_ValueChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration)
-			{
-				reload();
-			}
-		}
-
-		private void typeCb_TextChanged(object sender, EventArgs e)
-		{
-			if (_activeFiltration && !_reloadStop)
-			{
-				reload();
-			}
+			typeRecordsFiltrationCb.Text = originalValue;
+			_reloadRecordsStop = false;
 		}
 
 		private void mainTc_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			typeCb.Enabled = mainTc.SelectedIndex == 0;
+			if (mainTc.SelectedTab == notesTP)
+			{
+				showNotesFiltrationTab();
+			}
+			else if (mainTc.SelectedTab == checklistTP)
+			{
+				showCheckItemsFiltrationTab();
+			}
+			else
+			{
+				showRecordsFiltrationTab();
+			}
+		}
+
+		private void hideAllFiltrationTabs()
+		{
+			filtrationTC.TabPages.Clear();
+		}
+
+		private void showRecordsFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(recordsFiltrationTP);
+		}
+
+		private void showNotesFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(notesFiltrationTP);
+		}
+
+		private void showCheckItemsFiltrationTab()
+		{
+			hideAllFiltrationTabs();
+			filtrationTC.TabPages.Add(checkItemsFiltrationTP);
+		}
+		private void statisticsBtn_Click(object sender, EventArgs e)
+		{
+			var statsCounter = new StatisticsCounter();
+			var stats = statsCounter.Count(getRecords(), getRecordsDateFrom(), getRecordsDateTo());
+			var dialogue = new StatisticsForm(stats);
+			dialogue.ShowDialog();
+		}
+
+		private void createCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			var dialog = new CheckItemDialog(new CheckItem(), false, _checkItemRepo.GetAllTypes());
+			var result = dialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				_checkItemRepo.Add(dialog.Item);
+				reloadCheckItems();
+			}
+		}
+
+		private void editCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var selectedIndex = selected[0];
+				var checkItem = _checkItems[selectedIndex];
+
+				var dialog = new CheckItemDialog(checkItem, true, _checkItemRepo.GetAllTypes());
+				var result = dialog.ShowDialog();
+				if (result == DialogResult.OK)
+				{
+					_checkItemRepo.Edit(dialog.Item);
+					reloadCheckItems();
+				}
+			}
+		}
+
+		private void deleteCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			deleteCheckItem();
+		}
+
+		private void completeCheckItemBtn_Click(object sender, EventArgs e)
+		{
+			setCheckItemsButtonStates(false);
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var selectedIndex = selected[0];
+				var item = _checkItems[selectedIndex];
+				var id = item.ID;
+				if (!item.Completed)
+				{
+					_checkItemRepo.Complete(id);
+					reloadCheckItems();
+				}
+			}
+			setCheckItemsButtonStates();
+		}
+		private void deleteCheckItem()
+		{
+			setCheckItemsButtonStates(false);
+			var selected = checklistLv.SelectedIndices;
+			if (selected.Count == 1)
+			{
+				var result = new CustomMessageBox("Varování", "Opravdu chcete úkol smazat?").ShowDialog();
+				if (result == DialogResult.Yes)
+				{
+					var selectedIndex = selected[0];
+					var id = _checkItems[selectedIndex].ID;
+					_checkItemRepo.Delete(id);
+					reloadCheckItems();
+				}
+			}
+			setCheckItemsButtonStates();
+		}
+
+		private void checklistLv_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				deleteCheckItem();
+			}
+		}
+
+		private void checklistLv_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			setCheckItemsButtonStates();
+		}
+
+		private void recordsFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeRecordsFiltration = !_activeRecordsFiltration;
+			if (_activeRecordsFiltration)
+			{
+				recordsFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				recordsFiltrationBtn.Text = "Filtrování";
+			}
+			reloadRecords();
+		}
+
+		private void notesFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeNotesFiltration = !_activeNotesFiltration;
+			if (_activeNotesFiltration)
+			{
+				notesFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				notesFiltrationBtn.Text = "Filtrování";
+			}
+			reloadNotes();
+		}
+
+		private void checkItemsFiltrationBtn_Click(object sender, EventArgs e)
+		{
+			_activeCheckItemsFiltration = !_activeCheckItemsFiltration;
+			if (_activeCheckItemsFiltration)
+			{
+				checkItemsFiltrationBtn.Text = "Zrušit filtrování";
+			}
+			else
+			{
+				checkItemsFiltrationBtn.Text = "Filtrování";
+			}
+			reloadCheckItems();
+		}
+
+		private void dateFromRecordsFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void dateToRecordsFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void dateFromNotesFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void dateToNotesFiltrationDtp_ValueChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void typeRecordsFiltrationCb_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration && !_reloadRecordsStop)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void typeCheckItemsFiltrationCb_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeCheckItemsFiltration && !_reloadCheckItemsStop)
+			{
+				reloadCheckItems();
+			}
+		}
+
+		private void completedCheckItemsFiltrationCB_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (_activeCheckItemsFiltration)
+			{
+				reloadCheckItems();
+			}
+		}
+
+		private void containsRecordsFiltrationTB_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeRecordsFiltration)
+			{
+				reloadRecords();
+			}
+		}
+
+		private void containsNotesFiltrationTB_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeNotesFiltration)
+			{
+				reloadNotes();
+			}
+		}
+
+		private void containsCheckItemsFiltrationTB_TextChanged(object sender, EventArgs e)
+		{
+			if (_activeCheckItemsFiltration)
+			{
+				reloadCheckItems();
+			}
 		}
 	}
 }
