@@ -217,15 +217,15 @@ namespace Eli.TimeManagement.App
 		private DateTime? getNotesDateFrom()
 		{
 			return _activeNotesFiltration
-				? dateFromNotesFiltrationDtp.Value.Date
-				: (DateTime?)null;
+				? dateFromNotesFiltrationDtp.Value?.Date
+				: null;
 		}
 
 		private DateTime? getNotesDateTo()
 		{
 			return _activeNotesFiltration
-				? dateToNotesFiltrationDtp.Value.Date
-				: (DateTime?)null;
+				? dateToNotesFiltrationDtp.Value?.Date
+				: null;
 		}
 
 		private string getRecordsType()
