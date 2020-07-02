@@ -71,8 +71,8 @@
 			this.recordsFiltrationBtn = new System.Windows.Forms.Button();
 			this.containsRecordsFiltrationLbl = new System.Windows.Forms.Label();
 			this.containsRecordsFiltrationTB = new System.Windows.Forms.TextBox();
-			this.dateFromRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
-			this.dateToRecordsFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
+			this.dateFromRecordsFiltrationDtp = new FProgramming.WinFormsLib.NullableDateTimePicker();
+			this.dateToRecordsFiltrationDtp = new FProgramming.WinFormsLib.NullableDateTimePicker();
 			this.notesFiltrationTP = new System.Windows.Forms.TabPage();
 			this.notesFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.containsNotesFiltrationLbl = new System.Windows.Forms.Label();
@@ -80,6 +80,8 @@
 			this.dateFromNotesFiltrationLbl = new System.Windows.Forms.Label();
 			this.dateToNotesFiltrationLbl = new System.Windows.Forms.Label();
 			this.notesFiltrationBtn = new System.Windows.Forms.Button();
+			this.dateFromNotesFiltrationDtp = new FProgramming.WinFormsLib.NullableDateTimePicker();
+			this.dateToNotesFiltrationDtp = new FProgramming.WinFormsLib.NullableDateTimePicker();
 			this.checkItemsFiltrationTP = new System.Windows.Forms.TabPage();
 			this.checkItemsFiltrationTlp = new System.Windows.Forms.TableLayoutPanel();
 			this.completedCheckItemsFiltrationCB = new System.Windows.Forms.ComboBox();
@@ -89,8 +91,6 @@
 			this.checkItemsFiltrationBtn = new System.Windows.Forms.Button();
 			this.containsCheckItemsFiltrationTB = new System.Windows.Forms.TextBox();
 			this.containsCheckItemsFiltrationLbl = new System.Windows.Forms.Label();
-			this.dateFromNotesFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
-			this.dateToNotesFiltrationDtp = new Eli.TimeManagement.FormsLibrary.NullableDateTimePicker();
 			((System.ComponentModel.ISupportInitialize)(this.logoPb)).BeginInit();
 			this.mainTc.SuspendLayout();
 			this.recordsTP.SuspendLayout();
@@ -692,6 +692,26 @@
 			this.notesFiltrationBtn.UseVisualStyleBackColor = true;
 			this.notesFiltrationBtn.Click += new System.EventHandler(this.notesFiltrationBtn_Click);
 			// 
+			// dateFromNotesFiltrationDtp
+			// 
+			this.dateFromNotesFiltrationDtp.CustomFormat = null;
+			this.dateFromNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateFromNotesFiltrationDtp.Location = new System.Drawing.Point(83, 3);
+			this.dateFromNotesFiltrationDtp.Name = "dateFromNotesFiltrationDtp";
+			this.dateFromNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateFromNotesFiltrationDtp.TabIndex = 19;
+			this.dateFromNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromNotesFiltrationDtp_ValueChanged);
+			// 
+			// dateToNotesFiltrationDtp
+			// 
+			this.dateToNotesFiltrationDtp.CustomFormat = null;
+			this.dateToNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dateToNotesFiltrationDtp.Location = new System.Drawing.Point(83, 29);
+			this.dateToNotesFiltrationDtp.Name = "dateToNotesFiltrationDtp";
+			this.dateToNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
+			this.dateToNotesFiltrationDtp.TabIndex = 20;
+			this.dateToNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToNotesFiltrationDtp_ValueChanged);
+			// 
 			// checkItemsFiltrationTP
 			// 
 			this.checkItemsFiltrationTP.Controls.Add(this.checkItemsFiltrationTlp);
@@ -799,26 +819,6 @@
 			this.containsCheckItemsFiltrationLbl.Text = "Obsahuje";
 			this.containsCheckItemsFiltrationLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// dateFromNotesFiltrationDtp
-			// 
-			this.dateFromNotesFiltrationDtp.CustomFormat = null;
-			this.dateFromNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateFromNotesFiltrationDtp.Location = new System.Drawing.Point(83, 3);
-			this.dateFromNotesFiltrationDtp.Name = "dateFromNotesFiltrationDtp";
-			this.dateFromNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
-			this.dateFromNotesFiltrationDtp.TabIndex = 19;
-			this.dateFromNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateFromNotesFiltrationDtp_ValueChanged);
-			// 
-			// dateToNotesFiltrationDtp
-			// 
-			this.dateToNotesFiltrationDtp.CustomFormat = null;
-			this.dateToNotesFiltrationDtp.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dateToNotesFiltrationDtp.Location = new System.Drawing.Point(83, 29);
-			this.dateToNotesFiltrationDtp.Name = "dateToNotesFiltrationDtp";
-			this.dateToNotesFiltrationDtp.Size = new System.Drawing.Size(228, 20);
-			this.dateToNotesFiltrationDtp.TabIndex = 20;
-			this.dateToNotesFiltrationDtp.ValueChanged += new System.EventHandler(this.dateToNotesFiltrationDtp_ValueChanged);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -915,10 +915,10 @@
 		private System.Windows.Forms.TextBox containsNotesFiltrationTB;
 		private System.Windows.Forms.TextBox containsCheckItemsFiltrationTB;
 		private System.Windows.Forms.Label containsCheckItemsFiltrationLbl;
-		private FormsLibrary.NullableDateTimePicker dateFromRecordsFiltrationDtp;
-		private FormsLibrary.NullableDateTimePicker dateToRecordsFiltrationDtp;
-		private FormsLibrary.NullableDateTimePicker dateFromNotesFiltrationDtp;
-		private FormsLibrary.NullableDateTimePicker dateToNotesFiltrationDtp;
+		private FProgramming.WinFormsLib.NullableDateTimePicker dateFromRecordsFiltrationDtp;
+		private FProgramming.WinFormsLib.NullableDateTimePicker dateToRecordsFiltrationDtp;
+		private FProgramming.WinFormsLib.NullableDateTimePicker dateFromNotesFiltrationDtp;
+		private FProgramming.WinFormsLib.NullableDateTimePicker dateToNotesFiltrationDtp;
 	}
 }
 

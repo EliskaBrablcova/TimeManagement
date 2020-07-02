@@ -55,18 +55,9 @@
     <Compile Include="CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="NullableDateTimePicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NullableDateTimePicker.Designer.cs">
-      <DependentUpon>NullableDateTimePicker.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NullableDateTimePicker.resx">
-      <DependentUpon>NullableDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
