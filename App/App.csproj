@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormsLibrary\FormsLibrary.csproj">
-      <Project>{98b3f09b-5104-414d-aa4f-45232234e6c3}</Project>
+      <Project>{66a98663-e089-4049-aa39-5b3b29c8cf46}</Project>
       <Name>FormsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
